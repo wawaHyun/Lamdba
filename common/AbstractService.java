@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public abstract class AbstractService<T> {
 public abstract Messenger save(T t); //craete something
+public abstract Messenger save2(T t); //craete something
 public abstract List<T> findAll(); //list
 public abstract Optional<T> findById(Long id);
 public abstract String count(); //수 세는거

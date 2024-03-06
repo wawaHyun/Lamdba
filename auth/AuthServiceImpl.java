@@ -31,6 +31,11 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
     }
 
     @Override
+    public Messenger save2(Member member) {
+        return null;
+    }
+
+    @Override
     public List<Member> findAll() {
         return new ArrayList<>(users.values());
     }

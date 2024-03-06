@@ -5,13 +5,14 @@ import crawler.CrawlerService;
 import crawler.CrawlerView;
 import product.ProductView;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("0-system exit, 1-auth, 2-product, " +
-                "3-board, 4-bank program");
+                "3-board, 4-bank program, 5-crawler");
         while (true){
             switch (sc.next()){
                 case "0" :

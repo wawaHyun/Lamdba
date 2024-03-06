@@ -91,6 +91,11 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     }
 
     @Override
+    public Messenger save2(Account account) {
+        return null;
+    }
+
+    @Override
     public List<Account> findAll() {
         return null;
     }
