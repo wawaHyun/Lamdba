@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package auth;
 import java.sql.*;
 public class UserRepository {
@@ -21,4 +22,13 @@ public class UserRepository {
         statement.close();
         connection.close();
     }
+=======
+package auth;
+
+public class UserRepository {
+
+
+    public void addUsers() {
+    }
+>>>>>>> 1d5e23b5330aae36283c381fc0ae287c6bdf79dd
 }
