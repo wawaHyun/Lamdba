@@ -1,7 +1,6 @@
 
 package account;
 
-import auth.AuthServiceImpl;
 import common.AbstractService;
 import enums.Messenger;
 
