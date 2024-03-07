@@ -1,13 +1,6 @@
 package crawler;
 
-import account.AccountView;
-import auth.AuthView;
-import board.BoardView;
-import product.ProductView;
-
-import org.jsoup.Jsoup;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
