@@ -28,8 +28,8 @@ public class UserController {
     public String login(Scanner sc) {
         System.out.println("Please enter your ID & PW.");
         return auth.login(Member.builder()
-                .memberId(sc.next())
-                .memberPw(sc.next())
+                .memId(sc.next())
+                .memPw(sc.next())
                 .build());
     }
 
@@ -40,14 +40,14 @@ public class UserController {
     public String updatePassword(Scanner sc) {
         System.out.println("Please enter your ID & PW.");
         return auth.updatePassword(Member.builder()
-                .memberId(sc.next())
-                .memberPw(sc.next())
+                .memId(sc.next())
+                .memPw(sc.next())
                 .build());
     }
 
     public String delete(Scanner sc) {
         return auth.delete(Member.builder()
-                .memberId(sc.next())
+                .memId(sc.next())
                 .build());
     }
     public Boolean existsById(Scanner sc) {
@@ -92,5 +92,27 @@ public class UserController {
     public List<?> findUsers() throws SQLException {
         return auth.findUsers();
     }
+    public String touch() throws SQLException {return auth.touch();}
 
+    public String rm() throws SQLException {return auth.rm();
+    }
+
+    public String ls(Scanner sc) throws SQLException {
+        return auth.ls();
+    }
+
+    public String tain(Scanner sc) {
+        System.out.println("Plese enter your infomation");
+        System.out.println("ID, PW, name, phoneNum, job, height, weight");
+        System.out.println("jaja 998 jainname 010555 OLdesu 180 70");
+        return auth.tain(Member.builder()
+                .memId(sc.next())
+                .memPw(sc.next())
+                .name(sc.next())
+                .phone(sc.next())
+                .job(sc.next())
+                .height(sc.nextDouble())
+                .weight(sc.nextDouble())
+                .build());
+    }
 }

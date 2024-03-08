@@ -18,4 +18,12 @@ public interface UserService {
     Map<String, ?> getUserMap();
     String test();
     List<?> findUsers() throws SQLException;
+
+    String touch() throws SQLException;
+
+    String rm() throws SQLException;
+
+    String ls() throws SQLException;
+
+    String tain(Member mems);
 }

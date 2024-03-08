@@ -16,6 +16,7 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     private static UserServiceImpl instance = new UserServiceImpl();
     private static UserRepository repository;
     Map<String, Member> users;
+    List<Member> userls;
 
     private UserServiceImpl() {
         this.users = new HashMap<>();
@@ -30,7 +31,7 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     //-----------------------------------singleton
     @Override
     public Messenger save(Member member) {
-        users.put(member.getMemberId(), member);
+        users.put(member.getMemId(), member);
         return Messenger.SUCCESS;
     }
 
@@ -46,9 +47,9 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 
     @Override
     public String login(Member memberParam) {
-        return users.getOrDefault(memberParam.getMemberId(), Member.builder().memberPw("").build())
-                .getMemberPw()
-                .equals(memberParam.getMemberPw())
+        return users.getOrDefault(memberParam.getMemId(), Member.builder().memPw("").build())
+                .getMemPw()
+                .equals(memberParam.getMemPw())
                 ? "wellcome to back" : "404 Not Found : login fail";
     }
 
@@ -63,13 +64,13 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 
     @Override
     public String updatePassword(Member member) {
-        users.get(member.getName()).setMemberPw(member.getMemberPw());
+        users.get(member.getName()).setMemPw(member.getMemPw());
         return "Password change complete";
     }
 
     @Override
     public String delete(Member member) {
-        users.remove(member.getMemberId());
+        users.remove(member.getMemId());
         return "member delete.";
     }
 
@@ -84,17 +85,17 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
         return users.values()
                 .stream()
                 .filter(i -> i.getName().equals(name.getName()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ>>>왜 NLNAME을 Key값으로 해서 헀는데 결과가 나오는가?
     @Override
-    public Map<String, ?> findUsersByNemeFramMap(String memberid) {
-        System.out.println("11 :" + memberid);
+    public Map<String, ?> findUsersByNemeFramMap(String memid) {
+        System.out.println("11 :" + memid);
         return users
                 .entrySet()
                 .stream()
-                .filter(i -> i.getKey().equals(memberid))
+                .filter(i -> i.getKey().equals(memid))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -126,8 +127,8 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public Optional<Member> getOne(String memberid) {
-        return Optional.of(users.get(memberid));
+    public Optional<Member> getOne(String memid) {
+        return Optional.of(users.get(memid));
     }
 
     @Override
@@ -142,14 +143,13 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
                 .mapToObj(i -> util.createRandomMemberId())
                 .forEach(i -> {
                     users.put(i, Member.builder()
-                            .memberId(i)
-                            .memberPw("1111")
+                            .memId(i)
+                            .memPw("1111")
                             .name(util.createRandomName())
                             .job(util.createRandomJob())
-                            .address(util.createRandomMemberId())
+                            .address((long)(util.createRandomInteger(10,99)))
                             .build());
                 });
-
         return "add dummy : " + users.size();
     }
 
@@ -161,6 +161,26 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     @Override
     public List<?> findUsers() throws SQLException {
         return repository.findUsers();
+    }
+
+    @Override
+    public String touch() throws SQLException {
+        return repository.touch();
+    }
+
+    @Override
+    public String rm() throws SQLException {
+        return repository.rm();
+    }
+
+    @Override
+    public String ls() throws SQLException {
+        return repository.ls();
+    }
+
+    @Override
+    public String tain(Member mems) {
+        return repository.tain(mems);
     }
 
 }

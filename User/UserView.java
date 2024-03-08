@@ -12,11 +12,18 @@ public class UserView {
         System.out.println(ctrl.addUsers());
         while (true){
             System.out.println(" ");
+//            System.out.println("0-back main menu, 1-join(save), 2-login, 3-Long id search(findById), " +
+//                    "4-PW update, 5-member delete, 6-member list(findAll), 7-member total of number, " +
+//                    "8-NL name search(findUsersByName), 9-NL name search(findUsersByNameFromMap)," +
+//                    "10-job search(findUsersByJob), 11-job search(findUsersByJob), 12-getOne(String id)," +
+//                    "13-getUserMap, 14-Check membership registration(existsById), 15-test, 16-Repository");
+
             System.out.println("0-back main menu, 1-join(save), 2-login, 3-Long id search(findById), " +
                     "4-PW update, 5-member delete, 6-member list(findAll), 7-member total of number, " +
                     "8-NL name search(findUsersByName), 9-NL name search(findUsersByNameFromMap)," +
                     "10-job search(findUsersByJob), 11-job search(findUsersByJob), 12-getOne(String id)," +
-                    "13-getUserMap, 14-Check membership registration(existsById), 15-test, 16-Repository");
+                    "13-getUserMap, 14-Check membership registration(existsById), 15-test, 16-Repository, " +
+                    "touch-table create, rm-table delete, ls-table list check, in-table value insert");
             switch (sc.next()){
                 case "0":
                     return;
@@ -68,13 +75,20 @@ public class UserView {
                     break;
                 case "16" :
                     ctrl.findUsers();
-//                    System.out.println(ctrl.findUsers());
                     break;
-
+                case "touch" :
+                    ctrl.touch();
+                    break;
+                case "rm" :
+                    ctrl.rm();
+                    break;
+                case "in" :
+                    System.out.println(ctrl.tain(sc));
+                    break;
+                case "ls" :
+                    System.out.println(ctrl.ls(sc));
+                    break;
             }
         }
-
-
-
     }
 }
