@@ -8,23 +8,22 @@ import lombok.*;
 @ToString(exclude = {"id"})
 public class Member {
     private Long id;
-    private String memberId;
-    private String memberPw;
+    private String memId;
+    private String memPw;
     private String name;
-    private int socialNum;
-    private int phoneNum;
-    private String address;
+    private String phone;
+    private Long address;
     private String job;
-    private int height;
-    private int weight;
+    private Double height;
+    private Double weight;
     @Builder(builderClassName = "builder")
-    public Member(Long id,String memberId, String memberPw, String name, int socialNum, int phoneNum, String address, String job, int height, int weight){
+    public Member(Long id,String memId, String memPw, String name,
+                  String phone, Long address, String job, Double height, Double weight){
         this.id = id;
-        this.memberId = memberId;
-        this.memberPw = memberPw;
+        this.memId = memId;
+        this.memPw = memPw;
         this.name = name;
-        this.socialNum = socialNum;
-        this.phoneNum = phoneNum;
+        this.phone = phone;
         this.address = address;
         this.job = job;
         this.height = height;
