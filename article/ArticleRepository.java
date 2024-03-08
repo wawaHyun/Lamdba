@@ -32,16 +32,9 @@ import java.util.Optional;
 
 
         public List<?> findArticleByWeb() throws SQLException {
-            String sql = "select * from articles";
+            String sql = "select dfdfdfdf from article";
             PreparedStatement prstmt = conec.prepareStatement(sql);
             ResultSet rs = prstmt.executeQuery();
-
-//            List<?> list = new ArrayList<>();
-//            list.forEach(-> list.set(rs.getInt("id"),
-//                    rs.getInt("title"),
-//                    rs.getInt("content"),
-//                    rs.getInt("writer")));
-
 
             List<Article> list = new ArrayList<>();
             if(rs.next()){
@@ -53,11 +46,6 @@ import java.util.Optional;
                             .writer(rs.getString("writer"))
                             .build());
 
-//                    System.out.printf("ID : %d, Title : %s, content : %s, writer : %s\n",
-//                            rs.getInt("id"),
-//                            rs.getString("title"),
-//                            rs.getString("content"),
-//                            rs.getInt("writer"));
                 }while (rs.next());
             }else {
                 System.out.println("data is notings.");
@@ -65,8 +53,6 @@ import java.util.Optional;
 
             rs.close();
             prstmt.close();
-            System.out.println("kdjhf");
-
             return list;
 
         }

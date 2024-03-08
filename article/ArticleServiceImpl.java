@@ -13,11 +13,12 @@ public class ArticleServiceImpl extends AbstractService<Article> implements Arti
 
     private static ArticleServiceImpl instance = new ArticleServiceImpl();
     ArticleRepository res;
-    private ArticleServiceImpl(){
+
+    private ArticleServiceImpl() {
         this.res = ArticleRepository.getInstance();
     }
 
-    public static ArticleServiceImpl getInstance(){
+    public static ArticleServiceImpl getInstance() {
         return instance;
     }
 
