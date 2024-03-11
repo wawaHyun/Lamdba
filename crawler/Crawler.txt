@@ -14,3 +14,8 @@
 
  : Document의 HTML 요소
 
+
+
+ "touch-table create,
+  rm-table delete,
+  cat-table check");

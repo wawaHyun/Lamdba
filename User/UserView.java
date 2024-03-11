@@ -1,22 +1,28 @@
 
-package auth;
+package User;
 
-import common.AbstractService;
-
+import java.sql.SQLException;
 import java.util.Scanner;
 
-public class AuthView {
-    public static void authMain(Scanner sc) {
-        AuthController ctrl = new AuthController();
+public class UserView {
+    public static void userMain(Scanner sc) throws SQLException {
+        UserController ctrl = new UserController();
         ctrl.addUsers();
         System.out.println(ctrl.addUsers());
-
         while (true){
+            System.out.println(" ");
+//            System.out.println("0-back main menu, 1-join(save), 2-login, 3-Long id search(findById), " +
+//                    "4-PW update, 5-member delete, 6-member list(findAll), 7-member total of number, " +
+//                    "8-NL name search(findUsersByName), 9-NL name search(findUsersByNameFromMap)," +
+//                    "10-job search(findUsersByJob), 11-job search(findUsersByJob), 12-getOne(String id)," +
+//                    "13-getUserMap, 14-Check membership registration(existsById), 15-test, 16-Repository");
+
             System.out.println("0-back main menu, 1-join(save), 2-login, 3-Long id search(findById), " +
                     "4-PW update, 5-member delete, 6-member list(findAll), 7-member total of number, " +
                     "8-NL name search(findUsersByName), 9-NL name search(findUsersByNameFromMap)," +
                     "10-job search(findUsersByJob), 11-job search(findUsersByJob), 12-getOne(String id)," +
-                    "13-getUserMap, 14-Check membership registration(existsById)");
+                    "13-getUserMap, 14-Check membership registration(existsById), 15-test, 16-Repository, " +
+                    "touch-table create, rm-table delete, ls-table list check, in-table value insert");
             switch (sc.next()){
                 case "0":
                     return;
@@ -36,7 +42,7 @@ public class AuthView {
                     System.out.println(ctrl.delete(sc));
                     break;
                 case "6" :
-                    System.out.println(ctrl.findAll());
+                    ctrl.findAll().forEach(i-> System.out.println(i));
                     break;
                 case "7" :
                     System.out.println("total of number is "+ctrl.count());
@@ -51,6 +57,7 @@ public class AuthView {
                     System.out.println(ctrl.findUsersByJob(sc));
                     break;
                 case "11" :
+//                    ctrl.findUsersByJobFromMap(sc).forEach(i-> System.out.println(i));
                     System.out.println(ctrl.findUsersByJobFromMap(sc));
                     break;
                 case "12" :
@@ -62,11 +69,25 @@ public class AuthView {
                 case "14" :
                     System.out.println(ctrl.existsById(sc));
                     break;
-
+                case "15" :
+                    System.out.println(ctrl.test());
+                    break;
+                case "16" :
+                    ctrl.findUsers();
+                    break;
+                case "touch" :
+                    ctrl.touch();
+                    break;
+                case "rm" :
+                    ctrl.rm();
+                    break;
+                case "in" :
+                    System.out.println(ctrl.tain(sc));
+                    break;
+                case "ls" :
+                    System.out.println(ctrl.ls(sc));
+                    break;
             }
         }
-
-
-
     }
 }

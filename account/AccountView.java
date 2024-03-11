@@ -1,8 +1,6 @@
 
 package account;
 
-import account.AccountController;
-
 import java.util.Scanner;
 
 public class AccountView {

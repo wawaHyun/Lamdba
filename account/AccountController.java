@@ -1,17 +1,12 @@
 
 package account;
 
-import account.AccountService;
-import auth.AuthServiceImpl;
-import common.AbstractService;
 import common.UtilService;
-import account.AccountServiceImpl;
 import common.UtilServiceImpl;
 import enums.Messenger;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Scanner;
 
 public class AccountController {

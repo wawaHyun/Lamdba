@@ -1,15 +1,14 @@
 
-package auth;
+package User;
 
-import account.Account;
+import enums.Messenger;
 import member.Member;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Scanner;
 
-public interface AuthService {
+public interface UserService {
     String login(Member memberParam);
     String updatePassword(Member user);
     List<Member> findUsersByName(Member name);
@@ -18,4 +17,14 @@ public interface AuthService {
     Map<String, ?> findUsersByJobFromMap(String job);
     String addUsers();
     Map<String, ?> getUserMap();
+    String test();
+    List<?> findUsers() throws SQLException;
+
+    Messenger touch() throws SQLException;
+
+    String rm() throws SQLException;
+
+    String ls() throws SQLException;
+
+    String tain(Member mems);
 }
