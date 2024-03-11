@@ -163,28 +163,5 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
         return repository.findUsers();
     }
 
-    @Override
-<<<<<<< HEAD
-    public Messenger touch() throws SQLException {
-=======
-    public String touch() throws SQLException {
->>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
-        return repository.touch();
-    }
-
-    @Override
-    public String rm() throws SQLException {
-        return repository.rm();
-    }
-
-    @Override
-    public String ls() throws SQLException {
-        return repository.ls();
-    }
-
-    @Override
-    public String tain(Member mems) {
-        return repository.tain(mems);
-    }
 
 }

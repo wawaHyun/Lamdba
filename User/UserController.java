@@ -92,31 +92,5 @@ public class UserController {
     public List<?> findUsers() throws SQLException {
         return auth.findUsers();
     }
-<<<<<<< HEAD
-    public Messenger touch() throws SQLException {return auth.touch();}
-=======
-    public String touch() throws SQLException {return auth.touch();}
->>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
 
-    public String rm() throws SQLException {return auth.rm();
-    }
-
-    public String ls(Scanner sc) throws SQLException {
-        return auth.ls();
-    }
-
-    public String tain(Scanner sc) {
-        System.out.println("Plese enter your infomation");
-        System.out.println("ID, PW, name, phoneNum, job, height, weight");
-        System.out.println("jaja 998 jainname 010555 OLdesu 180 70");
-        return auth.tain(Member.builder()
-                .memId(sc.next())
-                .memPw(sc.next())
-                .name(sc.next())
-                .phone(sc.next())
-                .job(sc.next())
-                .height(sc.nextDouble())
-                .weight(sc.nextDouble())
-                .build());
-    }
 }
