@@ -1,5 +1,5 @@
 
-package account;
+package com.turing.api.account;
 import lombok.*;
 
 import java.time.LocalDate;

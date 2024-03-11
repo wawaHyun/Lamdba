@@ -1,5 +1,5 @@
 
-package article;
+package com.turing.api.article;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class ArticleView {
 
         while (true){
             System.out.println("\nwellcome to Articles.");
-            System.out.println("0-back menu, 1-article");
+            System.out.println("0-back menu, 1-com.turing.api.article");
             switch (sc.next()) {
                 case "0":
                     return;

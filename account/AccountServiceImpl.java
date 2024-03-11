@@ -1,5 +1,5 @@
 
-package account;
+package com.turing.api.account;
 
 import common.AbstractService;
 import enums.Messenger;
@@ -78,7 +78,7 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
                         list.get(i).getBalance();
                 break;
             } else {
-                result = "404 Not found : account";
+                result = "404 Not found : com.turing.api.account";
             }
         }
         return result;

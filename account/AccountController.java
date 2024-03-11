@@ -1,5 +1,5 @@
 
-package account;
+package com.turing.api.account;
 
 import common.UtilService;
 import common.UtilServiceImpl;
@@ -21,8 +21,8 @@ public class AccountController {
     }
 
     public Messenger createAccount(Scanner sc) {
-        System.out.println("Start creating your account.");
-        System.out.println("Please enter the account holder.");
+        System.out.println("Start creating your com.turing.api.account.");
+        System.out.println("Please enter the com.turing.api.account holder.");
         return accSer.save(Account.builder()
                 .accountNumber(util.createRandomAccount())
                 .accountHolder(sc.next())
@@ -33,7 +33,7 @@ public class AccountController {
 
     public String deposit(Scanner sc) {
         System.out.println("Start deposit.\n" +
-                "Please enter your account & holer & you want deposit.");
+                "Please enter your com.turing.api.account & holer & you want deposit.");
         return accSer.deposit(Account.builder()
                 .transactionDate(nowDate)
                 .accountNumber(sc.next())
@@ -44,7 +44,7 @@ public class AccountController {
 
     public String withdraw(Scanner sc) {
         System.out.println("Start withdraw.\n" +
-                "Please enter your account & holer & you want withdraw.");
+                "Please enter your com.turing.api.account & holer & you want withdraw.");
         return accSer.deposit(Account.builder()
                 .transactionDate(nowDate)
                 .accountNumber(sc.next())
@@ -54,7 +54,7 @@ public class AccountController {
     }
 
     public String getBalance(Scanner sc) {
-        System.out.println("Enter the account whose balance you want to check.");
+        System.out.println("Enter the com.turing.api.account whose balance you want to check.");
         return accSer.getBalance(Account.builder()
                 .accountNumber(sc.next())
                 .transactionDate(nowDate)
@@ -62,7 +62,7 @@ public class AccountController {
     }
 
     public String cancelAccount(Scanner sc) {
-        System.out.println("Start deleting your account.");
+        System.out.println("Start deleting your com.turing.api.account.");
         System.out.println("Please enter the Account & holder.");
         return accSer.delete(Account.builder()
                 .accountNumber(sc.next())

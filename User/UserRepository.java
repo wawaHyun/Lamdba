@@ -1,8 +1,8 @@
 
-package User;
+package com.turing.api.User;
 
+import com.turing.api.member.Member;
 import enums.Messenger;
-import member.Member;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class UserRepository {
     }
 
     public List<?> findUsers() throws SQLException {
-        String sql = "select * from board";
+        String sql = "select * from com.turing.api.board";
         PreparedStatement prstmt = connection.prepareStatement(sql);
         ResultSet rs = prstmt.executeQuery();
 

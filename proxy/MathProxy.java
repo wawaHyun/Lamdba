@@ -1,5 +1,5 @@
 
-package proxy;
+package com.turing.api.proxy;
 
 import jdk.dynalink.beans.StaticClass;
 

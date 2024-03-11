@@ -1,5 +1,5 @@
 
-package board;
+package com.turing.api.board;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

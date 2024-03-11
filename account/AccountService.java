@@ -1,5 +1,5 @@
 
-package account;
+package com.turing.api.account;
 
 public interface AccountService {
     String deposit(Account accountInfor);

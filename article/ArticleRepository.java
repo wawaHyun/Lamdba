@@ -1,5 +1,5 @@
 
-package article;
+package com.turing.api.article;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ArticleRepository {
 
 
         public List<?> findArticleByWeb() throws SQLException {
-            String sql = "select dfdfdfdf from article";
+            String sql = "select dfdfdfdf from com.turing.api.article";
             PreparedStatement prstmt = conec.prepareStatement(sql);
             ResultSet rs = prstmt.executeQuery();
 

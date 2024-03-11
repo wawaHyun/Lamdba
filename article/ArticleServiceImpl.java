@@ -1,5 +1,5 @@
 
-package article;
+package com.turing.api.article;
 
 import common.AbstractService;
 import enums.Messenger;

@@ -1,5 +1,5 @@
 
-package member;
+package com.turing.api.member;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

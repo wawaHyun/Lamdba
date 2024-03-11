@@ -1,6 +1,6 @@
 
 
-package article;
+package com.turing.api.article;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

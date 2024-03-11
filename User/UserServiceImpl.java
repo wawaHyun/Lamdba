@@ -1,10 +1,11 @@
 
-package User;
+package com.turing.api.User;
 
+import com.turing.api.member.Member;
 import common.AbstractService;
 import common.UtilServiceImpl;
 import enums.Messenger;
-import member.Member;
+
 import common.UtilService;
 
 import java.sql.SQLException;
@@ -71,7 +72,7 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     @Override
     public String delete(Member member) {
         users.remove(member.getMemId());
-        return "member delete.";
+        return "com.turing.api.member delete.";
     }
 
     @Override
