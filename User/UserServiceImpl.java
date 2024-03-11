@@ -164,7 +164,11 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
+<<<<<<< HEAD
     public Messenger touch() throws SQLException {
+=======
+    public String touch() throws SQLException {
+>>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
         return repository.touch();
     }
 

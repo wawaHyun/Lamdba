@@ -92,7 +92,11 @@ public class UserController {
     public List<?> findUsers() throws SQLException {
         return auth.findUsers();
     }
+<<<<<<< HEAD
     public Messenger touch() throws SQLException {return auth.touch();}
+=======
+    public String touch() throws SQLException {return auth.touch();}
+>>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
 
     public String rm() throws SQLException {return auth.rm();
     }

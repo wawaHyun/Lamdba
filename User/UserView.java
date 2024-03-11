@@ -2,6 +2,10 @@
 package User;
 
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
 import java.util.Scanner;
 
 public class UserView {

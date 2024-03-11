@@ -1,7 +1,10 @@
 
 package User;
 
+<<<<<<< HEAD
 import enums.Messenger;
+=======
+>>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
 import member.Member;
 
 import java.sql.SQLException;
@@ -20,7 +23,11 @@ public interface UserService {
     String test();
     List<?> findUsers() throws SQLException;
 
+<<<<<<< HEAD
     Messenger touch() throws SQLException;
+=======
+    String touch() throws SQLException;
+>>>>>>> 2196d46e6208c0beff581b79a883ffc4796605a9
 
     String rm() throws SQLException;
 
