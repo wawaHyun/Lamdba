@@ -1,6 +1,7 @@
 
 package User;
 
+import enums.Messenger;
 import member.Member;
 
 import java.sql.SQLException;
@@ -18,5 +19,11 @@ public interface UserService {
     Map<String, ?> getUserMap();
     String test();
     List<?> findUsers() throws SQLException;
+    Messenger touch();
 
+    String rm();
+
+    String tain(Member mems);
+
+    String ls() throws SQLException;
 }

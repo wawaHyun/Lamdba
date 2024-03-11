@@ -163,5 +163,25 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
         return repository.findUsers();
     }
 
+    @Override
+    public Messenger touch() {
+        return repository.touch();
+    }
+
+    @Override
+    public String rm() {
+        return repository.rm();
+    }
+
+    @Override
+    public String tain(Member mems) {
+        return repository.tain(mems);
+    }
+
+    @Override
+    public String ls() throws SQLException {
+        return repository.ls();
+    }
+
 
 }

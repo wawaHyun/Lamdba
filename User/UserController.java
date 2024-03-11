@@ -93,4 +93,19 @@ public class UserController {
         return auth.findUsers();
     }
 
+    public Messenger touch() {
+        return auth.touch();
+    }
+
+    public String rm() {
+        return auth.rm();
+    }
+
+    public String tain(Scanner sc) {
+        return auth.tain(Member.builder().build());
+    }
+
+    public String ls(Scanner sc) throws SQLException {
+        return auth.ls();
+    }
 }
