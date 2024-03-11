@@ -1,4 +1,4 @@
-package crawler;
+package com.turing.api.crawler;
 
 import common.AbstractRepository;
 import org.jsoup.Jsoup;

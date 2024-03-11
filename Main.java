@@ -5,8 +5,8 @@ import com.turing.api.account.AccountView;
 
 import com.turing.api.article.ArticleView;
 import com.turing.api.board.BoardView;
-import crawler.CrawlerView;
-import product.ProductView;
+import com.turing.api.crawler.CrawlerView;
+import com.turing.api.product.ProductView;
 
 import java.io.IOException;
 import java.sql.SQLException;

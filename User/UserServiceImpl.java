@@ -2,11 +2,11 @@
 package com.turing.api.User;
 
 import com.turing.api.member.Member;
-import common.AbstractService;
-import common.UtilServiceImpl;
-import enums.Messenger;
+import com.turing.api.common.AbstractService;
+import com.turing.api.common.UtilServiceImpl;
+import com.turing.api.enums.Messenger;
 
-import common.UtilService;
+import com.turing.api.common.UtilService;
 
 import java.sql.SQLException;
 import java.util.*;

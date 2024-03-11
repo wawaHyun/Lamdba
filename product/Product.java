@@ -1,5 +1,5 @@
 
-package product;
+package com.turing.api.product;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -1,7 +1,7 @@
 
-package common;
+package com.turing.api.common;
 
-import enums.Messenger;
+import com.turing.api.enums.Messenger;
 
 import java.util.List;
 import java.util.Optional;

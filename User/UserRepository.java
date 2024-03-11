@@ -2,7 +2,7 @@
 package com.turing.api.User;
 
 import com.turing.api.member.Member;
-import enums.Messenger;
+import com.turing.api.enums.Messenger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +21,8 @@ public class UserRepository {
     }
 
     Connection connection;
-
+    PreparedStatement prstmt;
+    ResultSet rs;
     private UserRepository() throws SQLException {
         connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/turingdb",
@@ -38,8 +39,8 @@ public class UserRepository {
 
     public List<?> findUsers() throws SQLException {
         String sql = "select * from com.turing.api.board";
-        PreparedStatement prstmt = connection.prepareStatement(sql);
-        ResultSet rs = prstmt.executeQuery();
+        prstmt = connection.prepareStatement(sql);
+        rs = prstmt.executeQuery();
 
         String msg = "";
         if (rs.next()) {
@@ -54,9 +55,6 @@ public class UserRepository {
             System.out.println("data is notings.");
         }
 
-        rs.close();
-        prstmt.close();
-
         return null;
     }
 
@@ -67,8 +65,9 @@ public class UserRepository {
                 "height VARCHAR(20), weight VARCHAR(20))";
         int ex =0;
         try {
-            PreparedStatement prstmt = connection.prepareStatement(cresql);
+            prstmt = connection.prepareStatement(cresql);
             prstmt.execute(cresql);
+
             System.out.println("CREATE table done.");
             ex = prstmt.executeUpdate();
             prstmt.close();
@@ -98,8 +97,8 @@ public class UserRepository {
         String msg ="";
         List<Member> list = new ArrayList<>();
         String sql = "select * from Users";
-        PreparedStatement prstmt = connection.prepareStatement(sql);
-        ResultSet rs = prstmt.executeQuery();
+        prstmt = connection.prepareStatement(sql);
+        rs = prstmt.executeQuery();
 
             if(rs.next()){
                 do{
@@ -132,7 +131,7 @@ public class UserRepository {
 //            String input = "INSERT INTO users (" +
 //                    "mem_id, mem_pw, name, phone, job, height, weight)" +
 //                    "VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement prstmt = connection.prepareStatement(input);
+            prstmt = connection.prepareStatement(input);
 
             prstmt.setString(1,mems.getMemId());
             prstmt.setString(2,mems.getMemPw());

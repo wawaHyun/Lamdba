@@ -1,8 +1,8 @@
 
-package product;
+package com.turing.api.product;
 
-import common.UtilService;
-import common.UtilServiceImpl;
+import com.turing.api.common.UtilService;
+import com.turing.api.common.UtilServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;

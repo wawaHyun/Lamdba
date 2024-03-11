@@ -1,6 +1,6 @@
 
 package com.turing.api.User;
-import enums.Messenger;
+import com.turing.api.enums.Messenger;
 import com.turing.api.member.Member;
 
 import java.sql.SQLException;

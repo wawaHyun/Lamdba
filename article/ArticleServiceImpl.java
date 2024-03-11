@@ -1,8 +1,8 @@
 
 package com.turing.api.article;
 
-import common.AbstractService;
-import enums.Messenger;
+import com.turing.api.common.AbstractService;
+import com.turing.api.enums.Messenger;
 
 import java.sql.SQLException;
 import java.util.List;

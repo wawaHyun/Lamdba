@@ -1,9 +1,9 @@
 
 package com.turing.api.account;
 
-import common.UtilService;
-import common.UtilServiceImpl;
-import enums.Messenger;
+import com.turing.api.common.UtilService;
+import com.turing.api.common.UtilServiceImpl;
+import com.turing.api.enums.Messenger;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
