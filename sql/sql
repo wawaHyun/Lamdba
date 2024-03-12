@@ -1,0 +1,73 @@
+-- soccer jpa version
+
+CREATE TABLE stadium(
+    stadium_id VARCHAR(10),
+    stadium_name VARCHAR(40),
+    hometeam_id VARCHAR(10),
+    seat_count INT,
+    address VARCHAR(60),
+    ddd VARCHAR(10),
+    tel VARCHAR(10),
+    CONSTRAINT stadium_pk PRIMARY KEY (stadium_id)
+)DEFAULT CHARSET=utf8;
+
+SELECT * FROM stadium;
+
+
+
+CREATE TABLE team(
+    team_id VARCHAR(10),
+    region_name VARCHAR(10),
+    team_name VARCHAR(40),
+    e_team_name VARCHAR(50),
+    orig_yyyy VARCHAR(10),
+    stadium_id VARCHAR(10),
+    zip_code1 VARCHAR(10),
+    zip_code2 VARCHAR(10),
+    address VARCHAR(80),
+    ddd VARCHAR(10),
+    tel VARCHAR(10),
+    fax VARCHAR(10),
+    homepage VARCHAR(50),
+    OWNER VARCHAR(10),
+    CONSTRAINT team_pk PRIMARY KEY (team_id),
+    CONSTRAINT team_fk FOREIGN KEY (stadium_id) REFERENCES stadium(stadium_id)
+)DEFAULT CHARSET=utf8;
+
+SELECT * FROM team;
+
+
+
+CREATE TABLE SCHEDULE(
+    stadium_id VARCHAR(10),
+    sche_date VARCHAR(10),
+    gubun VARCHAR(10),
+    hometeam_id VARCHAR(10),
+    awayteam_id VARCHAR(10),
+    home_score int,
+    away_score INT,
+    CONSTRAINT schedule_pk PRIMARY KEY (stadium_id,sche_date),
+    CONSTRAINT schedule_fk FOREIGN KEY (stadium_id) REFERENCES stadium(stadium_id)
+)DEFAULT CHARSET=utf8;
+SELECT * FROM SCHEDULE;
+
+
+
+
+CREATE TABLE player(
+    player_id VARCHAR(10),
+    player_name VARCHAR(20),
+    team_id VARCHAR(10),
+    e_player_name VARCHAR(40),
+    nickname VARCHAR(30),
+    join_yyyy VARCHAR(10),
+    POSITION VARCHAR(10),
+    back_no VARCHAR(10),
+    nation VARCHAR(20),
+    birth_date VARCHAR(20),
+    solar VARCHAR(10),
+    height VARCHAR(10),
+    weight VARCHAR(10),
+    CONSTRAINT player_pk PRIMARY KEY (player_id),
+    CONSTRAINT player_fk FOREIGN KEY (team_id) REFERENCES team(team_id)
+)DEFAULT CHARSET=utf8;
