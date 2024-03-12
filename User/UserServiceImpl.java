@@ -165,17 +165,17 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public Messenger touch() {
+    public Messenger touch()  {
         return repository.touch();
     }
 
     @Override
-    public String rm() {
+    public Messenger rm() {
         return repository.rm();
     }
 
     @Override
-    public String tain(Member mems) {
+    public Messenger tain(Member mems) throws SQLException {
         return repository.tain(mems);
     }
 

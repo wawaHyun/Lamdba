@@ -9,16 +9,29 @@ import java.util.*;
 public class UserController {
     UserServiceImpl auth;
 
+    private static UserController instance = new UserController();
     public UserController() {
         this.auth = UserServiceImpl.getInstance();
     }
 
-    public Messenger save() {
-        System.out.println("Please enter information below in order.");
-        System.out.println("ID, PW, name, socialNum, phoneNum, address, job, height, weight");
-        System.out.println("jaja 998 jainname 00531 010555 adressUU OLdesu 180 70");
+    public static UserController getInstance() {
+        return instance;
+    }
 
-        return Messenger.SUCCESS;
+    public Messenger save(Scanner sc) {
+        System.out.println("Please enter information below in order.");
+        System.out.println("ID, PW, name, phoneNum, job, height, weight");
+        System.out.println("jaja 998 jainname 010555 OLdesu 180.0 70.0");
+
+        return auth.save(Member.builder()
+                .memId(sc.next())
+                .memPw(sc.next())
+                .name(sc.next())
+                .phone(sc.next())
+                .job(sc.next())
+                .height(sc.nextDouble())
+                .weight(sc.nextDouble())
+                .build());
     }
 
     public List<Member> findAll() {
@@ -46,6 +59,7 @@ public class UserController {
     }
 
     public String delete(Scanner sc) {
+        System.out.println("Please enter you want dalete memid.");
         return auth.delete(Member.builder()
                 .memId(sc.next())
                 .build());
@@ -71,6 +85,7 @@ public class UserController {
     }
 
     public Map<String, ?> findUsersByNameFromMap(Scanner sc) {
+        System.out.println("Please enter the name you wish to search for.");
         return auth.findUsersByNemeFramMap(sc.next());
     }
 
@@ -97,15 +112,27 @@ public class UserController {
         return auth.touch();
     }
 
-    public String rm() {
+    public Messenger rm() {
         return auth.rm();
     }
 
-    public String tain(Scanner sc) {
-        return auth.tain(Member.builder().build());
+    public Messenger tain(Scanner sc) throws SQLException {
+        System.out.println("Please enter information below in order.");
+        System.out.println("ID, PW, name, phoneNum, job, height, weight");
+        System.out.println("jaja 998 jainname 010555 jobjob 180 70");
+
+        return auth.tain(Member.builder()
+                .memId(sc.next())
+                .memPw(sc.next())
+                .name(sc.next())
+                .phone(sc.next())
+                .job(sc.next())
+                .height(sc.nextDouble())
+                .weight(sc.nextDouble())
+                .build());
     }
 
-    public String ls(Scanner sc) throws SQLException {
+    public String ls() throws SQLException {
         return auth.ls();
     }
 }

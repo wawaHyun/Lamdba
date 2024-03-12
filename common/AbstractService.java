@@ -3,6 +3,7 @@ package com.turing.api.common;
 
 import com.turing.api.enums.Messenger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 

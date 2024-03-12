@@ -13,6 +13,11 @@ public class AccountController {
     AccountServiceImpl accSer;
     LocalDate nowDate;
     UtilService util;
+private static AccountController instance = new AccountController();
+
+    public static AccountController getInstance() {
+        return instance;
+    }
 
     public AccountController() {
         this.accSer = AccountServiceImpl.getInstance();

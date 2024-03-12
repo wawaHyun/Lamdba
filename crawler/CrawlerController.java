@@ -6,8 +6,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class CrawlerController {
-    CrawlerServiceImpl crawSer = CrawlerServiceImpl.getInstance();;
+
+    private static CrawlerController instance = new CrawlerController();
+    CrawlerServiceImpl crawSer;
+
     public CrawlerController() {
+        this.crawSer = CrawlerServiceImpl.getInstance();
+    }
+
+    public static CrawlerController getInstance() {
+        return instance;
     }
 
     public Map<String,?> findBugsMusic(Scanner sc) throws IOException {

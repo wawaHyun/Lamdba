@@ -68,29 +68,22 @@ public class UserRepository {
             prstmt = connection.prepareStatement(cresql);
             prstmt.execute(cresql);
 
-            System.out.println("CREATE table done.");
-            ex = prstmt.executeUpdate();
-            prstmt.close();
         } catch (Exception e) {
-            System.out.println("that table is alreay contain.");
+            cresql = "";
         }
-        System.out.println(ex);
-//        return (ex==0) ? "CREATE table done.": "that table is alreay contain..";
-        return null;
+        return (cresql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
     }
 
-    public String rm() {
-        try {
-            String dpsql = "DROP TABLE users;";
-            System.out.println("DROP table done.");
-            PreparedStatement pstmt = connection.prepareStatement(dpsql);
-            pstmt.executeUpdate(dpsql);
-            pstmt.close();
-        } catch (Exception e) {
-            System.out.println("data is notings");
+    public Messenger rm() {
+        String dpsql = "DROP TABLE users;";
+        try{
+            prstmt = connection.prepareStatement(dpsql);
+            prstmt.executeUpdate(dpsql);
+        }catch (Exception e){
+            dpsql = "";
         }
 
-        return null;
+        return (dpsql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
     }
 
     public String ls() throws SQLException {
@@ -122,15 +115,10 @@ public class UserRepository {
         return msg;
     }
 
-    public String tain(Member mems) {
+    public Messenger tain(Member mems) throws SQLException {
         String msg = "";
-        try {
             String input = "INSERT INTO users (mem_id, mem_pw, name, phone, job, height, weight) " +
                     "VALUES (?,?,?,?,?,?,?)";
-
-//            String input = "INSERT INTO users (" +
-//                    "mem_id, mem_pw, name, phone, job, height, weight)" +
-//                    "VALUES (?,?,?,?,?,?,?)";
             prstmt = connection.prepareStatement(input);
 
             prstmt.setString(1,mems.getMemId());
@@ -140,16 +128,8 @@ public class UserRepository {
             prstmt.setString(5,mems.getJob());
             prstmt.setString(6,String.valueOf(mems.getHeight()));
             prstmt.setString(7,String.valueOf(mems.getWeight()));
-
-            prstmt.executeUpdate();
-
             System.out.println(mems.toString());
-            msg = "INSERT success";
-            prstmt.close();
-        } catch (Exception e) {
-            msg = "INSERT fail...";
-        }
-        return msg;
+        return (prstmt.executeUpdate()>0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
 }

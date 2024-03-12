@@ -20,11 +20,8 @@ public interface UserService {
     Map<String, ?> getUserMap();
     String test();
     List<?> findUsers() throws SQLException;
-    Messenger touch();
-
-    String rm();
-
-    String tain(Member mems);
-
+    Messenger touch() ;
+    Messenger rm() ;
+    Messenger tain(Member mems) throws SQLException;
     String ls() throws SQLException;
 }
