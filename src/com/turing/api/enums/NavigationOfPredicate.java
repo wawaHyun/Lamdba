@@ -1,23 +1,17 @@
 package com.turing.api.enums;
 
-import com.turing.api.User.UserController;
-
 import com.turing.api.account.AccountView;
-import com.turing.api.article.Article;
 import com.turing.api.article.ArticleView;
 import com.turing.api.board.BoardView;
 import com.turing.api.crawler.CrawlerView;
-import com.turing.api.product.Product;
 import com.turing.api.product.ProductView;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public enum Navigation {
+public enum NavigationOfPredicate {
 
     USER("User",i->{
         while (UserRouter.getUserRouter(i).equals(true)){
@@ -49,23 +43,36 @@ public enum Navigation {
     ARTICLE("Article",i->{
         ArticleView.artiMain(i);
         return true;
+    }),
+    WRONG("Wrong",i->{
+        System.out.println("Wrong input.");
+        return true;
+    }),
+    EXIT("exit",i->{
+        System.out.println("OK,");
+        System.out.println("System Down, System Down..!");
+        return false;
+    }),
+    MENUCARE("menucare",i->{
+        while (MenuRouter.getMenuRouter(i)){};
+        return true;
     })
     ;
     private final String name;
     private final Predicate<Scanner> predi;
 
-    Navigation(String name, Predicate<Scanner> predi) {
+    NavigationOfPredicate(String name, Predicate<Scanner> predi) {
         this.name = name;
         this.predi = predi;
     }
     public static Boolean getNavigation(Scanner sc){
-        System.out.println("'User' auth, product, " +
+        System.out.println("exit, 'User' auth, product, " +
                 "com.turing.api.'board', 'bank' program, crawler, " +
-                "Article");
+                "Article, menucare");
         String select = sc.next();
-        return Stream.of(Navigation.values())
+        return Stream.of(NavigationOfPredicate.values())
                 .filter(i->i.name.equals(select))
-                .findAny().orElseThrow(()->new IllegalAccessError("Wrong input"))
+                .findAny().orElse(WRONG)
                 .predi.test(sc);
     }
 

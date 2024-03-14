@@ -1,27 +1,46 @@
 package com.turing.api;
 
-import com.turing.api.account.AccountView;
+import com.turing.api.Menu.MenuController;
+import com.turing.api.enums.NavigationOfSupplier;
 
-import com.turing.api.article.ArticleView;
-import com.turing.api.board.BoardView;
-import com.turing.api.crawler.CrawlerView;
-import com.turing.api.enums.Navigation;
-import com.turing.api.product.ProductView;
-
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-    public static Boolean getMain(Scanner sc){
-        return Navigation.getNavigation(sc);
-    }
+//    public static Boolean getMain(Scanner sc){
+//        return NavigationOfPredicate.getNavigation(sc);
+//    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        while (getMain(sc).equals(true)){
-            System.out.println(Main.getMain(sc));
+
+        //-------------------------------------------------------------
+        String stringFlag = "";
+        while (!stringFlag.equals("exit")) {
+            stringFlag = NavigationOfSupplier.getNavigation();
+            System.out.println("NavigationOfSupplier : "+stringFlag);
         }
+
+//        //-------------------------------------------------------------
+//        String stringFlag = "";
+//        while (!stringFlag.equals("exit")) {
+//            stringFlag = NavigationOfFunction.getNavigation(sc);
+//            System.out.println("NavigationOfFunction : " + stringFlag);
+//        }
+
+        //-------------------------------------------------------------
+//            NavigationOfConsumer.getNavigation(sc);
+//        System.out.println("NavigationOfConsumer is done.");
+
+
+//        //-------------------------------------------------------------
+//        boolean booleanFlag = true;
+//        while (booleanFlag==true) {
+//            booleanFlag = NavigationOfPredicate.getNavigation(sc);
+//            System.out.println("NavigationOfPredicate : " + booleanFlag);
+//        }
+
+        System.exit(0);
 
     }
 }

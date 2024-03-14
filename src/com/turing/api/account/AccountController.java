@@ -66,7 +66,7 @@ private static AccountController instance = new AccountController();
                 .build());
     }
 
-    public String cancelAccount(Scanner sc) {
+    public Messenger cancelAccount(Scanner sc) {
         System.out.println("Start deleting your com.turing.api.account.");
         System.out.println("Please enter the Account & holder.");
         return accSer.delete(Account.builder()

@@ -115,8 +115,8 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     }
 
     @Override
-    public String delete(Account account) {
-        return null;
+    public Messenger delete(Account account) {
+        return Messenger.SUCCESS;
     }
 
     @Override

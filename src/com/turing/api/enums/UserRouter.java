@@ -84,7 +84,7 @@ public enum UserRouter {
         return true;
     }),
     TOUCH("touch",i->{
-        UserController.getInstance().touch();
+        System.out.println(UserController.getInstance().touch());;
         return true;
     }),
     RM("rm",i->{

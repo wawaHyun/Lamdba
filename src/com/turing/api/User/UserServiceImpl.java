@@ -32,8 +32,12 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     //-----------------------------------singleton
     @Override
     public Messenger save(Member member) {
-        users.put(member.getMemId(), member);
-        return Messenger.SUCCESS;
+        Messenger result = Messenger.FAIL;
+        if(!users.containsKey(member.getMemId())){
+            users.put(member.getMemId(), member);
+            result = Messenger.SUCCESS;
+        }
+        return result;
     }
 
     @Override
@@ -64,15 +68,15 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public String updatePassword(Member member) {
+    public Messenger updatePassword(Member member) {
         users.get(member.getName()).setMemPw(member.getMemPw());
-        return "Password change complete";
+        return Messenger.SUCCESS;
     }
 
     @Override
-    public String delete(Member member) {
+    public Messenger delete(Member member) {
         users.remove(member.getMemId());
-        return "com.turing.api.member delete.";
+        return Messenger.SUCCESS;
     }
 
     @Override
@@ -89,7 +93,6 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
                 .collect(Collectors.toList());
     }
 
-    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ>>>왜 NLNAME을 Key값으로 해서 헀는데 결과가 나오는가?
     @Override
     public Map<String, ?> findUsersByNemeFramMap(String memid) {
         System.out.println("11 :" + memid);
@@ -112,7 +115,6 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
                 .collect(Collectors.toList());
     }
 
-    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ>>>왜 NLNAME을 Key값으로 해서 헀는데 결과가 나오는가?
     @Override
     public Map<String, ?> findUsersByJobFromMap(String job) {
         return users
@@ -180,7 +182,7 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public String ls() throws SQLException {
+    public Messenger ls() throws SQLException {
         return repository.ls();
     }
 

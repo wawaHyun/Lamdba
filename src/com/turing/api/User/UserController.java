@@ -50,7 +50,7 @@ public class UserController {
         return auth.findById(sc.nextLong());
     }
 
-    public String updatePassword(Scanner sc) {
+    public Messenger updatePassword(Scanner sc) {
         System.out.println("Please enter your ID & PW.");
         return auth.updatePassword(Member.builder()
                 .memId(sc.next())
@@ -58,7 +58,7 @@ public class UserController {
                 .build());
     }
 
-    public String delete(Scanner sc) {
+    public Messenger delete(Scanner sc) {
         System.out.println("Please enter you want dalete memid.");
         return auth.delete(Member.builder()
                 .memId(sc.next())
@@ -132,7 +132,7 @@ public class UserController {
                 .build());
     }
 
-    public String ls() throws SQLException {
+    public Messenger ls() throws SQLException {
         return auth.ls();
     }
 }

@@ -1,6 +1,8 @@
 
 package com.turing.api.User;
 
+import com.turing.api.enums.NavigationOfSupplier;
+import com.turing.api.enums.UserRouter;
 import com.turing.api.member.Member;
 import com.turing.api.enums.Messenger;
 
@@ -34,7 +36,7 @@ public class UserRepository {
     }
 
     public String test() {
-        return "UserRepository 연결";
+        return "UserRepository connecting test.";
     }
 
     public List<?> findUsers() throws SQLException {
@@ -63,12 +65,12 @@ public class UserRepository {
                 "id INT PRIMARY KEY AUTO_INCREMENT, mem_id VARCHAR(20) NOT NULL,mem_pw VARCHAR(20) NOT NULL," +
                 "name VARCHAR(20) NOT NULL, phone VARCHAR(20), job VARCHAR(20)," +
                 "height VARCHAR(20), weight VARCHAR(20))";
-        int ex =0;
         try {
             prstmt = connection.prepareStatement(cresql);
             prstmt.execute(cresql);
-
+            System.out.println("생성완");
         } catch (Exception e) {
+            System.out.println("문제 발생");
             cresql = "";
         }
         return (cresql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
@@ -86,31 +88,34 @@ public class UserRepository {
         return (dpsql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
     }
 
-    public String ls() throws SQLException {
-        String msg ="";
+    public Messenger ls() throws SQLException {
         List<Member> list = new ArrayList<>();
+
         String sql = "select * from Users";
-        prstmt = connection.prepareStatement(sql);
-        rs = prstmt.executeQuery();
 
-            if(rs.next()){
-                do{
-                    list.add(Member.builder()
-                            .id(rs.getLong(1))
-                            .memId(rs.getString(2))
-                            .memPw(rs.getString(3))
-                            .name(rs.getString(4))
-                            .phone(rs.getString(5))
-                            .job(rs.getString(6))
-                            .height(Double.parseDouble(rs.getString(7)))
-                            .weight(Double.parseDouble(rs.getString(8)))
-                            .build());
+        Messenger msg = Messenger.SUCCESS;
 
-                    list.forEach(System.out::println);
-                }while (rs.next());
-            }else {
-               msg = "no data";
-            }
+        try {
+            prstmt = connection.prepareStatement(sql);
+            rs = prstmt.executeQuery();
+                list.add(Member.builder()
+                        .id(rs.getLong(1))
+                        .memId(rs.getString(2))
+                        .memPw(rs.getString(3))
+                        .name(rs.getString(4))
+                        .phone(rs.getString(5))
+                        .job(rs.getString(6))
+                        .height(Double.parseDouble(rs.getString(7)))
+                        .weight(Double.parseDouble(rs.getString(8)))
+                        .build());
+
+                list.forEach(System.out::println);
+        }catch (Exception e){
+            msg = Messenger.FAIL;
+            System.out.println("table is nothing.");
+            System.out.println("back to first menu.");
+            NavigationOfSupplier.getNavigation();
+        }
 
         return msg;
     }
