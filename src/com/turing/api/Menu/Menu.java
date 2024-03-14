@@ -3,6 +3,7 @@ package com.turing.api.Menu;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @Getter
 @ToString(exclude = {"id"})
 public class Menu {

@@ -49,26 +49,24 @@ public class MenuRepository {
         String sql = "DELETE FROM menus Where "+menus.getCategory();
         prstmt = conn.prepareStatement(sql);
 
-
-
         return (prstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
     }
 
-    public Map<Long, Menu> menuLs() throws SQLException {
-        Map<Long,Menu> menuMap = new HashMap<>();
+    public Menu menuLs() throws SQLException {
+        Menu menus = new Menu();
         String sql = "select * from menus";
         prstmt = conn.prepareStatement(sql);
         rs = prstmt.executeQuery();
 
-        while (rs.next()){
-            Long key = rs.getLong("id");
-            menuMap.put(key,Menu.builder()
-                    .id(key)
-                    .category(rs.getString("category"))
-                    .menuItem(rs.getString("menuItem"))
-                    .build());
+        if (rs.next()) {
+            do {
+              menus.setCategory(rs.getString("category"));
+              menus.setMenuItem(rs.getString("menuitem"));
+            } while (rs.next());
+        } else {
+            System.out.println("data is notings.");
         }
-        return menuMap;
+        return menus;
     }
 
 

@@ -1,5 +1,7 @@
 package com.turing.api.enums;
 
+import com.turing.api.Menu.Menu;
+import com.turing.api.Menu.MenuController;
 import com.turing.api.account.AccountView;
 import com.turing.api.article.ArticleView;
 import com.turing.api.board.BoardView;
@@ -7,6 +9,9 @@ import com.turing.api.crawler.CrawlerView;
 import com.turing.api.product.ProductView;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -70,10 +75,12 @@ public enum NavigationOfSupplier {
         return sc;
     }
 
-    public static String getNavigation() {
+    public static String getNavigation() throws SQLException {
         System.out.println("exit, 'User' auth, product, " +
                 "com.turing.api.'board', 'bank' program, crawler, " +
                 "Article, menucare");
+        Menu menus = MenuController.getInsteance().menuLs();
+
         Scanner sc = NavigationOfSupplier.getSuppScanner();
         String select = sc.next();
         return Stream.of(NavigationOfSupplier.values())

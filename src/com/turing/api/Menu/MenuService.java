@@ -11,5 +11,5 @@ public interface MenuService {
 
     Messenger menuRm(Menu menus) throws SQLException;
 
-    Map<Long, Menu> menuLs() throws SQLException;
+    Menu menuLs() throws SQLException;
 }

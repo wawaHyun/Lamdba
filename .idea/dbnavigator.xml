@@ -130,12 +130,13 @@ CREATE TABLE Menus (
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="99d56daf-ff8a-48bb-82b4-c8c5666ca772" object-ref="consoles/turing" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="99d56daf-ff8a-48bb-82b4-c8c5666ca772" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="99d56daf-ff8a-48bb-82b4-c8c5666ca772" dataset="turingdb.menus" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

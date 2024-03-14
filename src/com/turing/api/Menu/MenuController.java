@@ -35,7 +35,7 @@ public class MenuController {
                 .build());
     }
 
-    public Map<Long, Menu> menuLs() throws SQLException {
+    public Menu menuLs() throws SQLException {
         System.out.println("show all menu.");
         return menu.menuLs();
     }

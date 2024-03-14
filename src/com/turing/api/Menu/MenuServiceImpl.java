@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public Map<Long, Menu> menuLs() throws SQLException {
+    public Menu menuLs() throws SQLException {
         return menu.menuLs();
     }
 }

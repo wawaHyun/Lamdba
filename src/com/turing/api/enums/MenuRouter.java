@@ -29,9 +29,7 @@ public enum MenuRouter {
     }),
     ALLMENU("Allmenu",i-> {
         try {
-            Map<Long, Menu> menuMap = new HashMap<>();
-            MenuController.getInsteance().menuLs();
-
+                MenuController.getInsteance().menuLs();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
