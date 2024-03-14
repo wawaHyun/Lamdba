@@ -1,6 +1,7 @@
-package crawler;
 
-import account.AccountServiceImpl;
+package  com.turing.api.crawler;
+
+import  com.turing.api.account.AccountServiceImpl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

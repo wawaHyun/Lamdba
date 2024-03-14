@@ -1,6 +1,7 @@
-package common;
 
-import enums.Messenger;
+package  com.turing.api.common;
+
+import  com.turing.api.enums.Messenger;
 
 import java.io.IOException;
 import java.util.Map;

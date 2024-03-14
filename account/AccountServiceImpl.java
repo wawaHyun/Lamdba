@@ -1,10 +1,9 @@
 
-package account;
+package com.turing.api.account;
 
-import auth.AuthServiceImpl;
-import common.AbstractService;
-import enums.Messenger;
 
+import com.turing.api.enums.Messenger;
+import com.turing.api.common.AbstractService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +78,7 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
                         list.get(i).getBalance();
                 break;
             } else {
-                result = "404 Not found : account";
+                result = "404 Not found : com.turing.api.account";
             }
         }
         return result;

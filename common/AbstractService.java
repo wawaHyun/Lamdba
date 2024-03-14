@@ -1,6 +1,9 @@
-package common;
 
-import enums.Messenger;
+package com.turing.api.common;
+
+
+
+import com.turing.api.enums.Messenger;
 
 import java.security.PublicKey;
 import java.util.List;

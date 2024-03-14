@@ -1,24 +1,30 @@
 
-package auth;
+package com.turing.api.User;
 
-import common.AbstractService;
-import common.UtilServiceImpl;
-import enums.Messenger;
-import member.Member;
-import common.UtilService;
+import com.turing.api.member.Member;
+import com.turing.api.common.AbstractService;
+import com.turing.api.common.UtilServiceImpl;
+import com.turing.api.enums.Messenger;
 
+import com.turing.api.common.UtilService;
+
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AuthServiceImpl extends AbstractService<Member> implements AuthService {
-    private static AuthService instance = new AuthServiceImpl();
+public class UserServiceImpl extends AbstractService<Member> implements UserService {
+    private static UserServiceImpl instance = new UserServiceImpl();
+    private static UserRepository repository;
     Map<String, Member> users;
+    List<Member> userls;
 
-    private AuthServiceImpl() {
+    private UserServiceImpl() {
+        this.users = new HashMap<>();
+        this.repository = UserRepository.getInstance();
     }
 
-    public static AuthService getInstance() {
+    public static UserServiceImpl getInstance() {
         return instance;
     }
 
@@ -26,7 +32,7 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
     //-----------------------------------singleton
     @Override
     public Messenger save(Member member) {
-        users.put(member.getMemberId(), member);
+        users.put(member.getMemId(), member);
         return Messenger.SUCCESS;
     }
 
@@ -42,9 +48,9 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
 
     @Override
     public String login(Member memberParam) {
-        return users.getOrDefault(memberParam.getMemberId(), Member.builder().memberPw("").build())
-                .getMemberPw()
-                .equals(memberParam.getMemberPw())
+        return users.getOrDefault(memberParam.getMemId(), Member.builder().memPw("").build())
+                .getMemPw()
+                .equals(memberParam.getMemPw())
                 ? "wellcome to back" : "404 Not Found : login fail";
     }
 
@@ -59,14 +65,14 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
 
     @Override
     public String updatePassword(Member member) {
-        users.get(member.getName()).setMemberPw(member.getMemberPw());
+        users.get(member.getName()).setMemPw(member.getMemPw());
         return "Password change complete";
     }
 
     @Override
     public String delete(Member member) {
-        users.remove(member.getMemberId());
-        return "member delete.";
+        users.remove(member.getMemId());
+        return "com.turing.api.member delete.";
     }
 
     @Override
@@ -80,17 +86,17 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
         return users.values()
                 .stream()
                 .filter(i -> i.getName().equals(name.getName()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ>>>왜 NLNAME을 Key값으로 해서 헀는데 결과가 나오는가?
     @Override
-    public Map<String, ?> findUsersByNemeFramMap(String memberid) {
-        System.out.println("11 :" + memberid);
+    public Map<String, ?> findUsersByNemeFramMap(String memid) {
+        System.out.println("11 :" + memid);
         return users
                 .entrySet()
                 .stream()
-                .filter(i -> i.getKey().equals(memberid))
+                .filter(i -> i.getKey().equals(memid))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -112,7 +118,7 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
         return users
                 .entrySet()
                 .stream()
-                .filter(i -> i.getKey().equals(job))
+                .filter(i -> i.getValue().getJob().equals(job))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -122,8 +128,8 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
     }
 
     @Override
-    public Optional<Member> getOne(String memberid) {
-        return Optional.of(users.get(memberid));
+    public Optional<Member> getOne(String memid) {
+        return Optional.of(users.get(memid));
     }
 
     @Override
@@ -134,33 +140,49 @@ public class AuthServiceImpl extends AbstractService<Member> implements AuthServ
     @Override
     public String addUsers() {
         UtilService util = UtilServiceImpl.getInstance();
-        //Int형은 4byte, Integer는 16byte.
-        //range = lengh로 start, end값 지정하고
         IntStream.range(0, 5)
-                //
                 .mapToObj(i -> util.createRandomMemberId())
                 .forEach(i -> {
                     users.put(i, Member.builder()
-                            .memberId(i)
-                            .memberPw("1111")
+                            .memId(i)
+                            .memPw("1111")
                             .name(util.createRandomName())
                             .job(util.createRandomJob())
+                            .address((long)(util.createRandomInteger(10,99)))
                             .build());
                 });
-
-//
-//        String id = util.createRandomMemberId();
-//        users.forEach(id -> {
-//            users.put(id, Member.builder()
-//                    .memberId(id)
-//                    .memberPw("1111")
-//                    .name(util.createRandomName())
-//                    .job(util.createRandomJob())
-//                    .build());
-//
-//        });
-
         return "add dummy : " + users.size();
     }
+
+    @Override
+    public String test() {
+        return repository.test();
+    }
+
+    @Override
+    public List<?> findUsers() throws SQLException {
+        return repository.findUsers();
+    }
+
+    @Override
+    public Messenger touch()  {
+        return repository.touch();
+    }
+
+    @Override
+    public Messenger rm() {
+        return repository.rm();
+    }
+
+    @Override
+    public Messenger tain(Member mems) throws SQLException {
+        return repository.tain(mems);
+    }
+
+    @Override
+    public String ls() throws SQLException {
+        return repository.ls();
+    }
+
 
 }

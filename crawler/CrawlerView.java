@@ -1,9 +1,9 @@
-package crawler;
 
-import account.AccountView;
-import auth.AuthView;
-import board.BoardView;
-import product.ProductView;
+package  com.turing.api.crawler;
+
+import  com.turing.api.account.AccountView;
+import  com.turing.api.board.BoardView;
+import  com.turing.api.product.ProductView;
 
 import org.jsoup.Jsoup;
 import java.io.IOException;

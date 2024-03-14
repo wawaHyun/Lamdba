@@ -1,15 +1,15 @@
 
-package auth;
+package com.turing.api.User;
 
-import account.Account;
-import member.Member;
+import com.turing.api.enums.Messenger;
+import com.turing.api.member.Member;
 
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Scanner;
 
-public interface AuthService {
+public interface UserService {
     String login(Member memberParam);
     String updatePassword(Member user);
     List<Member> findUsersByName(Member name);
@@ -18,4 +18,10 @@ public interface AuthService {
     Map<String, ?> findUsersByJobFromMap(String job);
     String addUsers();
     Map<String, ?> getUserMap();
+    String test();
+    List<?> findUsers() throws SQLException;
+    Messenger touch() ;
+    Messenger rm() ;
+    Messenger tain(Member mems) throws SQLException;
+    String ls() throws SQLException;
 }

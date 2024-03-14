@@ -1,5 +1,5 @@
 
-package common;
+package com.turing.api.common;
 
 public class UtilServiceImpl implements UtilService {
 
@@ -25,7 +25,7 @@ public class UtilServiceImpl implements UtilService {
     @Override
     public String createRandomName() {
         String[] names = {"이정재", "마동석", "송강호", "윤여정", "황정민", "정우성",
-                "이병헌", "현 빈", "유해진", "손석구", "전도연", "손예진", "하지원",
+                "이병헌", "현  빈", "유해진", "손석구", "전도연", "손예진", "하지원",
                 "김하늘", "송중기", "하정우", "장동건", "원 빈", "박해일", "소지섭", "김혜수"};
         return names[createRandomInteger(0,20)];
     }
@@ -53,8 +53,6 @@ public class UtilServiceImpl implements UtilService {
 
         for(int i=0;i<5;i++) {
             memberId +=
-                    //유니코드 a=97, 에서 26까지 더하면서 하면 abcd 불러오고
-                    //char이 정수타입이라서 String.valueOf를 통해 string으로 바꿔줌
                     String.valueOf(
                     (char)('a'+createRandomInteger(0,26)));
         }
