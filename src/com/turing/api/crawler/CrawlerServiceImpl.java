@@ -1,7 +1,15 @@
 
-package com.turing.api.crawler;
+package  com.turing.api.crawler;
+
+import  com.turing.api.account.AccountServiceImpl;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 public class CrawlerServiceImpl implements CrawlerService{
@@ -24,4 +32,3 @@ public class CrawlerServiceImpl implements CrawlerService{
         return repository.save2(paramMap);
     }
 }
-

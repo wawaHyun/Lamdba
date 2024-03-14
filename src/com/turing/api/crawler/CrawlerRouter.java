@@ -1,11 +1,8 @@
-package com.turing.api.enums;
+package com.turing.api.crawler;
 
-import com.turing.api.article.ArticleController;
-import com.turing.api.crawler.CrawlerController;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;

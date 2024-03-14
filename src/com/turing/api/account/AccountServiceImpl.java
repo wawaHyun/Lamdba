@@ -1,9 +1,9 @@
 
 package com.turing.api.account;
 
-import com.turing.api.common.AbstractService;
-import com.turing.api.enums.Messenger;
 
+import com.turing.api.enums.Messenger;
+import com.turing.api.common.AbstractService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
