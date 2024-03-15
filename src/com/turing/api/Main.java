@@ -1,8 +1,10 @@
 package com.turing.api;
 
 import com.turing.api.Menu.MenuController;
+import com.turing.api.enums.MenuRouter;
 import com.turing.api.enums.NavigationOfSupplier;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,8 +12,10 @@ public class Main {
 //        return NavigationOfPredicate.getNavigation(sc);
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
+
+        MenuRouter.getMenuRouter(sc);
 
 
         //-------------------------------------------------------------

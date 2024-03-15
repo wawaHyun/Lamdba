@@ -1,6 +1,8 @@
 package com.turing.api.enums;
 
 import com.turing.api.Main;
+import com.turing.api.Menu.Menu;
+import com.turing.api.Menu.MenuController;
 import com.turing.api.account.AccountView;
 import com.turing.api.article.ArticleView;
 import com.turing.api.board.BoardView;
@@ -57,9 +59,13 @@ public enum NavigationOfConsumer {
 
     public static void getNavigation(Scanner sc) {
         while (true) {
-            System.out.println("exit, 'User' auth, product, " +
-                    "com.turing.api.'board', 'bank' program, crawler, " +
-                    "Article, menucare");
+//            System.out.println("exit, 'User' auth, product, " +
+//                    "com.turing.api.'board', 'bank' program, crawler, " +
+//                    "Article, menucare");
+            System.out.println("[MENU]");
+            MenuController.getInsteance().getMenusByCategory("navigate").forEach(i -> System.out.print(((Menu)i).getMenuItem() + ", "));
+            System.out.println();
+
             String select = sc.next();
             Stream.of(NavigationOfConsumer.values())
                     .filter(i -> i.name.equals(select))

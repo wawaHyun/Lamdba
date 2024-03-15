@@ -1,5 +1,7 @@
 package com.turing.api.enums;
 
+import com.turing.api.Menu.Menu;
+import com.turing.api.Menu.MenuController;
 import com.turing.api.account.AccountController;
 import com.turing.api.article.ArticleController;
 
@@ -13,7 +15,7 @@ public enum ArticleRouter {
         System.out.println("back menu.");
         return false;
     }),
-    ARTICLE("article",i->{
+    ARTICLE("art",i->{
         try {
             ArticleController.getInstance().findArticleByWeb();
         } catch (SQLException e) {
@@ -32,8 +34,11 @@ public enum ArticleRouter {
     }
 
     public static Boolean getArtiRouter(Scanner sc) {
+        System.out.println("[MENU]");
+        MenuController.getInsteance().getMenusByCategory("article").forEach(i -> System.out.print(((Menu)i).getMenuItem() + ", "));
+        System.out.println();
+
         String select = sc.next();
-        System.out.println("'exit'back menu, article");
         return Stream.of(ArticleRouter.values())
                 .filter(i->i.name.equals(select))
                 .findAny().orElse(ArticleRouter.EXIT)

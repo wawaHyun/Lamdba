@@ -77,7 +77,7 @@ public class UserRepository {
     }
 
     public Messenger rm() {
-        String dpsql = "DROP TABLE users;";
+        String dpsql = "DROP TABLE users";
         try{
             prstmt = connection.prepareStatement(dpsql);
             prstmt.executeUpdate(dpsql);

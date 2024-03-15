@@ -1,5 +1,7 @@
 package com.turing.api.enums;
 
+import com.turing.api.Menu.Menu;
+import com.turing.api.Menu.MenuController;
 import com.turing.api.User.UserController;
 import com.turing.api.account.AccountController;
 
@@ -9,51 +11,51 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public enum AccountRouter {
-    EXIT("exit",i->{
+    EXIT("0",i->{
         System.out.println("back menu.");
         return false;
     }),
-    CREATEACCOUNT("createAccount",i->{
+    CREATEACCOUNT("1",i->{
         AccountController.getInstance().createAccount(i);
         return true;
     }),
-    DEPOSIT("deposit",i->{
+    DEPOSIT("2",i->{
         AccountController.getInstance().deposit(i);
         return true;
     }),
-    WITHDRAW("withdraw",i->{
+    WITHDRAW("3",i->{
         AccountController.getInstance().withdraw(i);
         return true;
     }),
-    BALANCE("Balance",i->{
+    BALANCE("4",i->{
         AccountController.getInstance().getBalance(i);
         return true;
     }),
-    DELETE("delete",i->{
+    DELETE("5",i->{
         AccountController.getInstance().cancelAccount(i);
         return true;
     }),
-    GETACCOUNT("getAccount",i->{
+    GETACCOUNT("6",i->{
         AccountController.getInstance().getAccount();
         return true;
     })
     ;
 
-    private final String aaname;
+    private final String name;
     private final Predicate<Scanner> predi;
 
-    AccountRouter(String aaname, Predicate<Scanner> predi) {
-        this.aaname = aaname;
+    AccountRouter(String name, Predicate<Scanner> predi) {
+        this.name = name;
         this.predi = predi;
     }
-
     public static Boolean getAccoRouter(Scanner sc) {
+        System.out.println("[MENU]");
+        MenuController.getInsteance().getMenusByCategory("account").forEach(i -> System.out.print(((Menu)i).getMenuItem() + ", "));
+        System.out.println();
+
         String select = sc.next();
-        System.out.println("\nwellcome to bank system.");
-        System.out.println("'exit'back menu, createAccount, deposit, withdraw, " +
-                "check the 'Balance', 'delete' Account, 'getAccount'check the my Account info");
         return Stream.of(AccountRouter.values())
-                .filter(i->i.aaname.equals(select))
+                .filter(i->i.name.equals(select))
                 .findAny().orElse(AccountRouter.EXIT)
                 .predi.test(sc);
     }

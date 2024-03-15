@@ -3,8 +3,9 @@ package com.turing.api.Menu;
 import com.turing.api.enums.Messenger;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MenuRepository {
     private static MenuRepository instance;
@@ -18,7 +19,7 @@ public class MenuRepository {
     }
 
     Connection conn;
-    PreparedStatement prstmt;
+    PreparedStatement pstmt;
     ResultSet rs;
 
     public MenuRepository() throws SQLException {
@@ -35,33 +36,35 @@ public class MenuRepository {
     public Messenger menuInsert(Menu menus) throws SQLException {
         String sql = "INSERT INTO menus (category, menuitem)" +
                 "VALUES (?,?)";
-        prstmt = conn.prepareStatement(sql);
+        pstmt = conn.prepareStatement(sql);
 
-        prstmt.setString(1,menus.getCategory());
-        prstmt.setString(2,menus.getMenuItem());
+        pstmt.setString(1,menus.getCategory());
+        pstmt.setString(2,menus.getMenuItem());
 
         System.out.println(menus.toString());
-        return (prstmt.executeUpdate()<0) ? Messenger.SUCCESS : Messenger.FAIL;
+        return (pstmt.executeUpdate()<0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
-    public Messenger menuRm(Menu menus) throws SQLException {
-        System.out.println("menuRm");
-        String sql = "DELETE FROM menus Where "+menus.getCategory();
-        prstmt = conn.prepareStatement(sql);
-
-        return (prstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
+    public Messenger menuRm(String rm) throws SQLException {
+        System.out.println("menuRm "+rm);
+        String sql = "DELETE FROM menus Where category = '"+rm+"'";
+        pstmt = conn.prepareStatement(sql);
+        System.out.println("don.");
+        return (pstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
     }
 
     public Menu menuLs() throws SQLException {
         Menu menus = new Menu();
         String sql = "select * from menus";
-        prstmt = conn.prepareStatement(sql);
-        rs = prstmt.executeQuery();
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
 
         if (rs.next()) {
             do {
+                menus.setId(rs.getLong("id"));
               menus.setCategory(rs.getString("category"));
               menus.setMenuItem(rs.getString("menuitem"));
+
             } while (rs.next());
         } else {
             System.out.println("data is notings.");
@@ -70,4 +73,48 @@ public class MenuRepository {
     }
 
 
+    public Messenger menuAllInsert(Menu menu) {
+        String sql = "INSERT INTO menus(category, menuitem) VALUES(?,?)";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, menu.getCategory());
+            pstmt.setString(2, menu.getMenuItem());
+            return pstmt.executeUpdate() >= 0 ? Messenger.SUCCESS : Messenger.FAIL;
+        } catch (SQLException e){
+            System.err.println("SQL Exception Occurred :" + menu.getCategory() + " " + menu.getMenuItem());
+            return Messenger.FAIL;
+        }
+    }
+
+    public List<?> getMenusByCategory(String category) {
+        String sql = "SELECT menuitem FROM menus m WHERE category = ?";
+        List<Menu> menus = new ArrayList<>();
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, category);
+            rs = pstmt.executeQuery();
+            while(rs.next())menus.add(Menu.builder()
+                    .menuItem(rs.getString(1))
+                    .build());
+        } catch (SQLException e){
+            System.err.println("SQL Exception Occurred");
+            return menus;
+        }
+        return menus;
+
+    }
+
+    public Messenger menuTouch(Scanner sc) throws SQLException {
+        String sql = "CREATE table"+sc+"(" +
+                "id INT PRIMARY KEY AUTO_INCREMENT, category VARCHAR(20), menuitem VARCHAR(80)";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.execute(sql);
+            System.out.println("생성완");
+        } catch (Exception e) {
+            System.out.println("문제 발생");
+            sql = "";
+        }
+        return (sql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
+    }
 }

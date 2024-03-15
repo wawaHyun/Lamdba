@@ -1,5 +1,7 @@
 package com.turing.api.enums;
 
+import com.turing.api.Menu.Menu;
+import com.turing.api.Menu.MenuController;
 import com.turing.api.article.ArticleController;
 import com.turing.api.common.UtilService;
 import com.turing.api.common.UtilServiceImpl;
@@ -43,8 +45,10 @@ public enum ProductRoutor {
     }
 
     public static Boolean getArtiRouter(Scanner sc) {
+        System.out.println("[MENU]");
+        MenuController.getInsteance().getMenusByCategory("product").forEach(i -> System.out.print(((Menu)i).getMenuItem() + ", "));
+        System.out.println();
         String select = sc.next();
-        System.out.println("'exit'back menu, product");
         return Stream.of(ProductRoutor.values())
                 .filter(i->i.name.equals(select))
                 .findAny().orElse(ProductRoutor.EXIT)

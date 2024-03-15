@@ -123,14 +123,18 @@ CREATE TABLE Menus (
     id INT PRIMARY KEY AUTO_INCREMENT,
     category VARCHAR(20) NOT NULL,
     menuItem VARCHAR(80)
-)]]></console>
+)
+
+DELETE FROM menus Where category = dd;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="99d56daf-ff8a-48bb-82b4-c8c5666ca772" object-ref="consoles/turing" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="99d56daf-ff8a-48bb-82b4-c8c5666ca772" />
