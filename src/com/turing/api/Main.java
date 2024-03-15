@@ -19,7 +19,8 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
 
-        UserRouter.getUserRouter(sc);
+        while (true){
+        UserRouter.getUserRouter(sc);}
 //        MenuRouter.getMenuRouter(sc);
 
 //        Messenger msg = MenuController.getInsteance().returnMessenger();
@@ -27,11 +28,11 @@ public class Main {
 //        List<?> allMenu = MenuController.getInsteance().returnAllMenu();
 
         //-------------------------------------------------------------
-        String stringFlag = "";
-        while (!stringFlag.equals("exit")) {
-            stringFlag = NavigationOfSupplier.getNavigation();
-            System.out.println("NavigationOfSupplier : "+stringFlag);
-        }
+//        String stringFlag = "";
+//        while (!stringFlag.equals("exit")) {
+//            stringFlag = NavigationOfSupplier.getNavigation();
+//            System.out.println("NavigationOfSupplier : "+stringFlag);
+//        }
 
 //        //-------------------------------------------------------------
 //        String stringFlag = "";
@@ -52,7 +53,7 @@ public class Main {
 //            System.out.println("NavigationOfPredicate : " + booleanFlag);
 //        }
 
-        System.exit(0);
+//        System.exit(0);
 
     }
 }

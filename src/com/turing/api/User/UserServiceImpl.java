@@ -15,13 +15,12 @@ import java.util.stream.IntStream;
 
 public class UserServiceImpl extends AbstractService<Member> implements UserService {
     private static UserServiceImpl instance = new UserServiceImpl();
-    private static UserRepository repository;
+    private static UserRepository repo;
     Map<String, Member> users;
-    List<Member> userls;
 
     private UserServiceImpl() {
         this.users = new HashMap<>();
-        this.repository = UserRepository.getInstance();
+        this.repo = UserRepository.getInstance();
     }
 
     public static UserServiceImpl getInstance() {
@@ -33,9 +32,9 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     @Override
     public Messenger save(Member member) throws SQLException {
         Messenger result = Messenger.FAIL;
-        if(!users.containsKey(member.getMemId())){
+        if (!users.containsKey(member.getMemId())) {
             users.put(member.getMemId(), member);
-            return repository.tain(member);
+            return repo.tain(member);
         }
         System.out.println("same ID already exists.");
         return Messenger.FAIL;
@@ -52,18 +51,38 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public String login(Member memberParam) throws SQLException {
-        return repository.login(memberParam);
+    public String login(Member member) throws SQLException {
+        List<String> list = repo.login(member);
+        list.forEach(System.out::println);
+
+        if (!member.getMemId().equals(list.get(0))) {
+            return "ID ["+member.getMemId()+"] is wrong ID";
+        }
+        if (!member.getMemPw().equals(list.get(1))) {
+            return "Wrong password input.";
+        }
+        return "wellcome to back, "+list.get(0);
     }
 
     @Override
     public Optional<Member> findById(Long id) throws SQLException {
-        return repository.findById(id);
+//        return Optional.of(users
+//                .values().stream()
+//                .filter(i->i.getId().equals(id))
+//                .toList().get(0));
+        return repo.findById(id);
     }
 
     @Override
-    public Messenger updatePassword(Member member) {
-        users.get(member.getName()).setMemPw(member.getMemPw());
+    public Messenger updatePassword(Member member) throws SQLException {
+        if (!member.getMemPw().equals(member.getMemPwRe())) {
+            System.out.println("pw and reconfirm pw is Different.");
+            return Messenger.FAIL;
+        }
+        System.out.println("password is same");
+        repo.updatePassword(member);
+
+        System.out.println("Password is successful update.");
         return Messenger.SUCCESS;
     }
 
@@ -144,7 +163,7 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
                             .memPw("1111")
                             .name(util.createRandomName())
                             .job(util.createRandomJob())
-                            .address((long)(util.createRandomInteger(10,99)))
+                            .address((long) (util.createRandomInteger(10, 99)))
                             .build());
                 });
         return "add dummy : " + users.size();
@@ -152,32 +171,32 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 
     @Override
     public String test() {
-        return repository.test();
+        return repo.test();
     }
 
     @Override
     public List<?> findUsers() throws SQLException {
-        return repository.findUsers();
+        return repo.findUsers();
     }
 
     @Override
-    public Messenger touch()  {
-        return repository.touch();
+    public Messenger touch() {
+        return repo.touch();
     }
 
     @Override
     public Messenger rm() {
-        return repository.rm();
+        return repo.rm();
     }
 
     @Override
     public Messenger tain(Member mems) throws SQLException {
-        return repository.tain(mems);
+        return repo.tain(mems);
     }
 
     @Override
     public Messenger ls() throws SQLException {
-        return repository.ls();
+        return repo.ls();
     }
 
 

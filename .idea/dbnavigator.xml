@@ -132,8 +132,12 @@ select * from Menus where category = '';
 show tables;
 select * from Users;
 
-select mem_id, mem_pw users from users
-where mem_id='jaja' and mem_pw='998';]]></console>
+select mem_id, mem_pw from users
+where mem_id='jaja' and mem_pw='998';
+
+select id from users where id=1;
+
+select mem_id, mem_pw from users where mem_id ='jaja' and mem_pw='998';]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

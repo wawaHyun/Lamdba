@@ -1,5 +1,6 @@
 
 package com.turing.api.User;
+
 import com.turing.api.enums.Messenger;
 import com.turing.api.member.Member;
 
@@ -10,6 +11,7 @@ public class UserController {
     UserServiceImpl auth;
 
     private static UserController instance = new UserController();
+
     public UserController() {
         this.auth = UserServiceImpl.getInstance();
     }
@@ -47,14 +49,17 @@ public class UserController {
     }
 
     public Optional<Member> findById(Scanner sc) throws SQLException {
+        System.out.println("Please enter Long ID you want to search for.");
         return auth.findById(sc.nextLong());
     }
 
-    public Messenger updatePassword(Scanner sc) {
-        System.out.println("Please enter your ID & PW.");
+    public Messenger updatePassword(Scanner sc) throws SQLException {
+        System.out.println("Start update for password.\n" +
+                "Please enter your ID & PW & reconfirm Pw.");
         return auth.updatePassword(Member.builder()
                 .memId(sc.next())
                 .memPw(sc.next())
+                .memPwRe(sc.next())
                 .build());
     }
 
@@ -64,6 +69,7 @@ public class UserController {
                 .memId(sc.next())
                 .build());
     }
+
     public Boolean existsById(Scanner sc) {
         return auth.existsById(sc.nextLong());
     }
@@ -72,6 +78,7 @@ public class UserController {
         System.out.println("Please enter the job you wish to search for.");
         return auth.findUsersByJob(sc.next());
     }
+
     public Map<String, ?> findUsersByJobFromMap(Scanner sc) {
         System.out.println("Please enter the job you wish to search for.");
         return auth.findUsersByJobFromMap(sc.next());
@@ -92,18 +99,23 @@ public class UserController {
     public String count() {
         return auth.count();
     }
+
     public String addUsers() {
         return auth.addUsers();
     }
+
     public Optional<Member> getOne(Scanner sc) {
         return auth.getOne(sc.next());
     }
+
     public Map<String, ?> getUserMap() {
         return auth.getUserMap();
     }
+
     public String test() {
         return auth.test();
     }
+
     public List<?> findUsers() throws SQLException {
         return auth.findUsers();
     }

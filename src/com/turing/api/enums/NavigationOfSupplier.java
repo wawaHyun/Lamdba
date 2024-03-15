@@ -16,8 +16,9 @@ import java.util.stream.Stream;
 
 public enum NavigationOfSupplier {
     USER("usr",()->{
-        while (UserRouter.getUserRouter(NavigationOfSupplier.getSuppScanner()).equals(true)){
-            System.out.println(" ");
+        while (UserRouter.getUserRouter(
+                NavigationOfSupplier.getSuppScanner()).equals(true)){
+            System.out.println();
         }
         return "your User process is done.\nwelcome back.";
     }),

@@ -140,28 +140,59 @@ public class UserRepository {
         return (prstmt.executeUpdate() > 0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
-    public String login(Member memberParam) throws SQLException {
+    public List<String> login(Member member) throws SQLException {
         String sql = "select mem_id, mem_pw users from users " +
-                "where mem_id=? and mem_pw=?";
-        int result = 0;
+                "where mem_id=? OR mem_pw=?";
         prstmt = connection.prepareStatement(sql);
-        prstmt.setString(1, memberParam.getMemId());
-        prstmt.setString(2, memberParam.getMemPw());
+        prstmt.setString(1, member.getMemId());
+        prstmt.setString(2, member.getMemPw());
         rs = prstmt.executeQuery();
+        List<String> list = new ArrayList<>();
+
+            if (!rs.next()) {
+                list.add(0,"wrong ID");
+                list.add(1,"wrong PW");
+                return list;
+            }
+        list.add(0, rs.getString("mem_id"));
+        list.add(1, rs.getString(2));
+
+        return list;
+    }
+
+    public Optional<Member> findById(Long id) throws SQLException {
+        String sql = "select id from users where id=?";
+        prstmt = connection.prepareStatement(sql);
+        System.out.println("11anjdl");
+
+        prstmt.setLong(1, id);
+        rs = prstmt.executeQuery();
+
+        Optional<Member> oprional = null;
+        System.out.println("11anjdl");
+        Long rsid = 0L;
+
         if (rs.next()) {
-            result = 1;
+            rsid = rs.getLong("id");
+            if (rsid.equals(id)) {
+                oprional = Optional.ofNullable(Member.builder().id(id).build());
+            }
         }
 
-        return (result > 0) ? "wellcome to back, " +
-                rs.getString(1) : "404 Not Found : login fail..";
+
+        return oprional;
     }
 
-    public String findById(Long id) throws SQLException {
-        String sql = "select mem_id form users where mem_id=?";
+    public Messenger updatePassword(Member member) throws SQLException {
+        String sql = "select mem_pw from user where mem_id = ? or mem_pw=?";
         prstmt = connection.prepareStatement(sql);
-        if(prstmt.executeQuery().next()) {}
-            
-        Optional<Member> opi = null;
-        return opi;
+        prstmt.setString(1, member.getMemPw());
+        prstmt.setString(2, member.getMemPw());
+        System.out.println("dkjf");
+        prstmt.executeUpdate();
+        System.out.println("dkjf");
+        return Messenger.SUCCESS;
     }
+
+
 }

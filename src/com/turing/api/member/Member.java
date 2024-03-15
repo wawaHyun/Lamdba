@@ -10,6 +10,7 @@ public class Member {
     private Long id;
     private String memId;
     private String memPw;
+    private String memPwRe;
     private String name;
     private String phone;
     private Long address;
@@ -17,11 +18,12 @@ public class Member {
     private Double height;
     private Double weight;
     @Builder(builderClassName = "builder")
-    public Member(Long id,String memId, String memPw, String name,
+    public Member(Long id,String memId, String memPw, String memPwRe, String name,
                   String phone, Long address, String job, Double height, Double weight){
         this.id = id;
         this.memId = memId;
         this.memPw = memPw;
+        this.memPwRe = memPwRe;
         this.name = name;
         this.phone = phone;
         this.address = address;

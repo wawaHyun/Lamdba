@@ -40,8 +40,12 @@ public enum UserRouter {
         }
         return true;
     }),
-    PWUPDATE("ch-pw",i->{
-        UserController.getInstance().updatePassword(i);
+    PWUPDATE("4"/*"ch-pw"*/,i->{
+        try {
+            UserController.getInstance().updatePassword(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
     DELETE("rm",i->{
