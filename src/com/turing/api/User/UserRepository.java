@@ -9,6 +9,7 @@ import com.turing.api.enums.Messenger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepository {
 
@@ -25,12 +26,14 @@ public class UserRepository {
     Connection connection;
     PreparedStatement prstmt;
     ResultSet rs;
+
     private UserRepository() throws SQLException {
         connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/turingdb",
                 "turing",
                 "password");
     }
+
     public static UserRepository getInstance() {
         return instance;
     }
@@ -78,10 +81,10 @@ public class UserRepository {
 
     public Messenger rm() {
         String dpsql = "DROP TABLE users";
-        try{
+        try {
             prstmt = connection.prepareStatement(dpsql);
             prstmt.executeUpdate(dpsql);
-        }catch (Exception e){
+        } catch (Exception e) {
             dpsql = "";
         }
 
@@ -98,19 +101,19 @@ public class UserRepository {
         try {
             prstmt = connection.prepareStatement(sql);
             rs = prstmt.executeQuery();
-                list.add(Member.builder()
-                        .id(rs.getLong(1))
-                        .memId(rs.getString(2))
-                        .memPw(rs.getString(3))
-                        .name(rs.getString(4))
-                        .phone(rs.getString(5))
-                        .job(rs.getString(6))
-                        .height(Double.parseDouble(rs.getString(7)))
-                        .weight(Double.parseDouble(rs.getString(8)))
-                        .build());
+            list.add(Member.builder()
+                    .id(rs.getLong(1))
+                    .memId(rs.getString(2))
+                    .memPw(rs.getString(3))
+                    .name(rs.getString(4))
+                    .phone(rs.getString(5))
+                    .job(rs.getString(6))
+                    .height(Double.parseDouble(rs.getString(7)))
+                    .weight(Double.parseDouble(rs.getString(8)))
+                    .build());
 
-                list.forEach(System.out::println);
-        }catch (Exception e){
+            list.forEach(System.out::println);
+        } catch (Exception e) {
             msg = Messenger.FAIL;
             System.out.println("table is nothing.");
             System.out.println("back to first menu.");
@@ -122,19 +125,19 @@ public class UserRepository {
 
     public Messenger tain(Member mems) throws SQLException {
         String msg = "";
-            String input = "INSERT INTO users (mem_id, mem_pw, name, phone, job, height, weight) " +
-                    "VALUES (?,?,?,?,?,?,?)";
-            prstmt = connection.prepareStatement(input);
+        String input = "INSERT INTO users (mem_id, mem_pw, name, phone, job, height, weight) " +
+                "VALUES (?,?,?,?,?,?,?)";
+        prstmt = connection.prepareStatement(input);
 
-            prstmt.setString(1,mems.getMemId());
-            prstmt.setString(2,mems.getMemPw());
-            prstmt.setString(3,mems.getName());
-            prstmt.setString(4,mems.getPhone());
-            prstmt.setString(5,mems.getJob());
-            prstmt.setString(6,String.valueOf(mems.getHeight()));
-            prstmt.setString(7,String.valueOf(mems.getWeight()));
-            System.out.println(mems.toString());
-        return (prstmt.executeUpdate()>0) ? Messenger.SUCCESS : Messenger.FAIL;
+        prstmt.setString(1, mems.getMemId());
+        prstmt.setString(2, mems.getMemPw());
+        prstmt.setString(3, mems.getName());
+        prstmt.setString(4, mems.getPhone());
+        prstmt.setString(5, mems.getJob());
+        prstmt.setString(6, String.valueOf(mems.getHeight()));
+        prstmt.setString(7, String.valueOf(mems.getWeight()));
+        System.out.println(mems.toString());
+        return (prstmt.executeUpdate() > 0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
     public String login(Member memberParam) throws SQLException {
@@ -145,11 +148,20 @@ public class UserRepository {
         prstmt.setString(1, memberParam.getMemId());
         prstmt.setString(2, memberParam.getMemPw());
         rs = prstmt.executeQuery();
-        if(rs.next()) {
+        if (rs.next()) {
             result = 1;
         }
 
-        return (result>0) ? "wellcome to back, " +
+        return (result > 0) ? "wellcome to back, " +
                 rs.getString(1) : "404 Not Found : login fail..";
+    }
+
+    public String findById(Long id) throws SQLException {
+        String sql = "select mem_id form users where mem_id=?";
+        prstmt = connection.prepareStatement(sql);
+        if(prstmt.executeQuery().next()) {}
+            
+        Optional<Member> opi = null;
+        return opi;
     }
 }

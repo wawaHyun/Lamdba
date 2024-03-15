@@ -32,8 +32,12 @@ public enum UserRouter {
         }
         return true;
     }),
-    FINDBYID("cat : ",i->{
-        UserController.getInstance().findById(i);
+    FINDBYID("cat",i->{
+        try {
+            UserController.getInstance().findById(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
     PWUPDATE("ch-pw",i->{

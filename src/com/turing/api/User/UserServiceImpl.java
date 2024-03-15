@@ -53,20 +53,12 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 
     @Override
     public String login(Member memberParam) throws SQLException {
-//        return users.getOrDefault(memberParam.getMemId(), Member.builder().memPw("").build())
-//                .getMemPw()
-//                .equals(memberParam.getMemPw())
-//                ? "wellcome to back" : "404 Not Found : login fail";
         return repository.login(memberParam);
     }
 
     @Override
-    public Optional<Member> findById(Long id) {
-        return Optional.of(users
-                .values()
-                .stream()
-                .filter(i -> i.getId().equals(id))
-                .collect(Collectors.toList()).get(0));
+    public Optional<Member> findById(Long id) throws SQLException {
+        return repository.findById(id);
     }
 
     @Override

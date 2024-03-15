@@ -46,7 +46,7 @@ public class UserController {
                 .build());
     }
 
-    public Optional<Member> findById(Scanner sc) {
+    public Optional<Member> findById(Scanner sc) throws SQLException {
         return auth.findById(sc.nextLong());
     }
 
