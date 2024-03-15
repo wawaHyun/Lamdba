@@ -45,11 +45,15 @@ public class MenuRepository {
         return (pstmt.executeUpdate()<0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
-    public Messenger menuRm(String rm) throws SQLException {
-        System.out.println("menuRm "+rm);
+    public Messenger menuRm() throws SQLException {
+        String sql = "Drop table memus";
+        pstmt = conn.prepareStatement(sql);
+        return (pstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
+    }
+
+    public Messenger menueOneRm(String rm) throws SQLException {
         String sql = "DELETE FROM menus Where category = '"+rm+"'";
         pstmt = conn.prepareStatement(sql);
-        System.out.println("don.");
         return (pstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
     }
 
@@ -116,5 +120,20 @@ public class MenuRepository {
             sql = "";
         }
         return (sql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
+    }
+
+    public Messenger returnMessenger() throws SQLException {
+        String sql = "";
+        pstmt = conn.prepareStatement(sql);
+        Messenger m = null;
+        return Messenger.SUCCESS;
+    }
+
+    public Menu returnMenu() {
+        return null;
+    }
+
+    public List<?> returnAllMenu() {
+        return null;
     }
 }

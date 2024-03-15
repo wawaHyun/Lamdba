@@ -17,11 +17,19 @@ public enum UserRouter {
         return false;
     }),
     JOIN("joi",i->{
-        System.out.println(UserController.getInstance().save(i));
+        try {
+            System.out.println(UserController.getInstance().save(i));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
     LOGIN("log",i->{
-        UserController.getInstance().login(i);
+        try {
+            System.out.println(UserController.getInstance().login(i));;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
     FINDBYID("cat : ",i->{

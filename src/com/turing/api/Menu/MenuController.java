@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenuController {
@@ -32,20 +31,36 @@ public class MenuController {
     public void menuAllInsert() {
         menu.menuAllInsert();
     }
-    public Messenger menueRm(Scanner sc) throws SQLException {
-        System.out.println("Please input the menu to be deleted.");
-        return menu.menuRm(sc.next());
+    public Messenger menueRm(Scanner i) throws SQLException {
+        return menu.menuRm();
     }
 
+    public Messenger menueOneRm(Scanner sc) throws SQLException {
+        System.out.println("Please input the menu to be deleted.");
+        return menu.menuOneRm(sc.next());
+    }
     public Menu menuLs() throws SQLException {
         System.out.println("show all menu.");
         return menu.menuLs();
     }
+
     public List<?> getMenusByCategory(String category){
         return menu.getMenusByCategory(category);
     }
 
     public Messenger menuTouch(Scanner sc) throws SQLException {
         return menu.menuTouch(sc);
+    }
+
+    public Messenger returnMessenger() throws SQLException {
+        return menu.returnMessenger();
+    }
+
+    public Menu returnMenu() {
+        return menu.returnMenu();
+    }
+
+    public List<?> returnAllMenu() {
+        return menu.returnAllMenu();
     }
 }

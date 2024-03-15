@@ -40,7 +40,7 @@ public class UserRepository {
     }
 
     public List<?> findUsers() throws SQLException {
-        String sql = "select * from com.turing.api.board";
+        String sql = "select * from board";
         prstmt = connection.prepareStatement(sql);
         rs = prstmt.executeQuery();
 
@@ -137,4 +137,19 @@ public class UserRepository {
         return (prstmt.executeUpdate()>0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
+    public String login(Member memberParam) throws SQLException {
+        String sql = "select mem_id, mem_pw users from users " +
+                "where mem_id=? and mem_pw=?";
+        int result = 0;
+        prstmt = connection.prepareStatement(sql);
+        prstmt.setString(1, memberParam.getMemId());
+        prstmt.setString(2, memberParam.getMemPw());
+        rs = prstmt.executeQuery();
+        if(rs.next()) {
+            result = 1;
+        }
+
+        return (result>0) ? "wellcome to back, " +
+                rs.getString(1) : "404 Not Found : login fail..";
+    }
 }

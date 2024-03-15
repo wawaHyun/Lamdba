@@ -18,7 +18,7 @@ public class UserController {
         return instance;
     }
 
-    public Messenger save(Scanner sc) {
+    public Messenger save(Scanner sc) throws SQLException {
         System.out.println("Please enter information below in order.");
         System.out.println("ID, PW, name, phoneNum, job, height, weight");
         System.out.println("jaja 998 jainname 010555 OLdesu 180.0 70.0");
@@ -38,7 +38,7 @@ public class UserController {
         return auth.findAll();
     }
 
-    public String login(Scanner sc) {
+    public String login(Scanner sc) throws SQLException {
         System.out.println("Please enter your ID & PW.");
         return auth.login(Member.builder()
                 .memId(sc.next())

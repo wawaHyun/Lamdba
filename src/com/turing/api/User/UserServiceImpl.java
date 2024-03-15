@@ -31,13 +31,14 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 
     //-----------------------------------singleton
     @Override
-    public Messenger save(Member member) {
+    public Messenger save(Member member) throws SQLException {
         Messenger result = Messenger.FAIL;
         if(!users.containsKey(member.getMemId())){
             users.put(member.getMemId(), member);
-            result = Messenger.SUCCESS;
+            return repository.tain(member);
         }
-        return result;
+        System.out.println("same ID already exists.");
+        return Messenger.FAIL;
     }
 
     @Override
@@ -51,11 +52,12 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public String login(Member memberParam) {
-        return users.getOrDefault(memberParam.getMemId(), Member.builder().memPw("").build())
-                .getMemPw()
-                .equals(memberParam.getMemPw())
-                ? "wellcome to back" : "404 Not Found : login fail";
+    public String login(Member memberParam) throws SQLException {
+//        return users.getOrDefault(memberParam.getMemId(), Member.builder().memPw("").build())
+//                .getMemPw()
+//                .equals(memberParam.getMemPw())
+//                ? "wellcome to back" : "404 Not Found : login fail";
+        return repository.login(memberParam);
     }
 
     @Override

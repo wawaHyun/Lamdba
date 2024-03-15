@@ -4,7 +4,6 @@ import com.turing.api.enums.Messenger;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenuServiceImpl implements MenuService{
@@ -25,9 +24,15 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public Messenger menuRm(String rm) throws SQLException {
-        return menu.menuRm(rm);
+    public Messenger menuRm() throws SQLException {
+        return menu.menuRm();
     }
+
+    @Override
+    public Messenger menuOneRm(String rm) throws SQLException {
+        return menu.menueOneRm(rm);
+    }
+
 
     @Override
     public void menuAllInsert() {
@@ -40,24 +45,6 @@ public class MenuServiceImpl implements MenuService{
 //                {"exit-exit","mkdir : user table",  "join-회원가입", "login-로그인", "findId-ID 검색", "updatePw-PW 변경", "delete-탈퇴", "list-회원목록", "searchName-이름 검색", "searchJob-직업 검색", "count-회원수"},
 //                {"0-Exit","mkdir : soccer table",  "1-soccer"}
 //                };
-
-        /**
-         * 공통 메뉴 명령어 정의
-         * x means 'Exit'
-         * mk means 'Create Table'
-         * cat means 'Find The One'
-         * touch means 'Insert One'
-         * ch-* means 'Change What'
-         * rm means 'Delete Row'
-         * ls-a means 'All List'
-         * ls-n means 'Find By Name'
-         * ls-* means 'Something List'
-         * cnt means 'Count'
-         * 이 외에 일상적이 아닌 단어는 약어 사용
-         * withdraw -> with
-         * deposit -> depo
-         * balance -> bal
-         * */
 
         String[] categories = {"navigate", "user", "account", "article", "board", "soccer"};
         String[][] menus = {{"x", "usr", "acc", "cwl", "art", "bbs","scc"},
@@ -90,5 +77,20 @@ public class MenuServiceImpl implements MenuService{
     @Override
     public Messenger menuTouch(Scanner sc) throws SQLException {
         return menu.menuTouch(sc);
+    }
+
+    @Override
+    public Messenger returnMessenger() throws SQLException {
+        return menu.returnMessenger();
+    }
+
+    @Override
+    public Menu returnMenu() {
+        return menu.returnMenu();
+    }
+
+    @Override
+    public List<?> returnAllMenu() {
+        return menu.returnAllMenu();
     }
 }

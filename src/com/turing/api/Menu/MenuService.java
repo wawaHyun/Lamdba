@@ -10,11 +10,16 @@ import java.util.Scanner;
 public interface MenuService {
     Messenger menuInsert(Menu menus) throws SQLException;
 
-    Messenger menuRm(String rm) throws SQLException;
+    Messenger menuRm() throws SQLException;
+    Messenger menuOneRm(String rm) throws SQLException;
     void menuAllInsert();
-
     Menu menuLs() throws SQLException;
+
     List<?> getMenusByCategory(String category);
 
     Messenger menuTouch(Scanner sc) throws SQLException;
+
+    Messenger returnMessenger() throws SQLException;
+    Menu returnMenu();
+    List<?> returnAllMenu();
 }

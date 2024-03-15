@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
-    String login(Member memberParam);
+    String login(Member memberParam) throws SQLException;
     Messenger updatePassword(Member user);
     List<Member> findUsersByName(Member name);
     Map<String,?> findUsersByNemeFramMap(String name);

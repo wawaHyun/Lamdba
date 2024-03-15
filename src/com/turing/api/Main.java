@@ -1,10 +1,14 @@
 package com.turing.api;
 
+import com.turing.api.Menu.Menu;
 import com.turing.api.Menu.MenuController;
 import com.turing.api.enums.MenuRouter;
+import com.turing.api.enums.Messenger;
 import com.turing.api.enums.NavigationOfSupplier;
+import com.turing.api.enums.UserRouter;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -15,8 +19,12 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
 
-        MenuRouter.getMenuRouter(sc);
+        UserRouter.getUserRouter(sc);
+//        MenuRouter.getMenuRouter(sc);
 
+//        Messenger msg = MenuController.getInsteance().returnMessenger();
+//        Menu oneMenu = MenuController.getInsteance().returnMenu();
+//        List<?> allMenu = MenuController.getInsteance().returnAllMenu();
 
         //-------------------------------------------------------------
         String stringFlag = "";

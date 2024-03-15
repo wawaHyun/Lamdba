@@ -27,6 +27,14 @@ public enum MenuRouter {
         }
         return true;
     }),
+    RMONEMENU("rmOne",i-> {
+        try {
+            MenuController.getInsteance().menueOneRm(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
+    }),
     RMMENU("rm",i-> {
         try {
             MenuController.getInsteance().menueRm(i);
@@ -65,7 +73,7 @@ public enum MenuRouter {
         this.predi = predi;
     }
     public static boolean getMenuRouter(Scanner sc){
-        System.out.println("'go' to Main menu, touch, add Menu, rm Menu, ls menu, alin-All Insert Menu");
+        System.out.println("'go' to Main menu, touch, add Menu, rm-rm All menu, rmOne-rm One Menu, ls menu, alin-All Insert Menu");
         String select = sc.next();
         return Stream.of(MenuRouter.values())
                 .filter(i->i.name.equals(select))
