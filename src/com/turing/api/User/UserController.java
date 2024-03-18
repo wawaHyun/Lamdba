@@ -36,7 +36,7 @@ public class UserController {
                 .build());
     }
 
-    public List<Member> findAll() {
+    public List<Member> findAll() throws SQLException {
         return auth.findAll();
     }
 
@@ -63,10 +63,11 @@ public class UserController {
                 .build());
     }
 
-    public Messenger delete(Scanner sc) {
-        System.out.println("Please enter you want dalete memid.");
+    public Messenger delete(Scanner sc) throws SQLException {
+        System.out.println("Please enter you want dalete memid & mempw.");
         return auth.delete(Member.builder()
                 .memId(sc.next())
+                .memPw(sc.next())
                 .build());
     }
 

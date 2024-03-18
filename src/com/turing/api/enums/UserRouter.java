@@ -32,7 +32,7 @@ public enum UserRouter {
         }
         return true;
     }),
-    FINDBYID("cat",i->{
+    FINDBYID("cat",i->{ //find Long ID
         try {
             UserController.getInstance().findById(i);
         } catch (SQLException e) {
@@ -40,7 +40,7 @@ public enum UserRouter {
         }
         return true;
     }),
-    PWUPDATE("4"/*"ch-pw"*/,i->{
+    PWUPDATE("ch-pw",i->{
         try {
             UserController.getInstance().updatePassword(i);
         } catch (SQLException e) {
@@ -48,12 +48,20 @@ public enum UserRouter {
         }
         return true;
     }),
-    DELETE("rm",i->{
-        UserController.getInstance().delete(i);
+    DELETE("rm",i->{ //delete one.
+        try {
+            UserController.getInstance().delete(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
-    FINDALL("ls-a",i->{
-        UserController.getInstance().findAll().forEach(System.out::println);
+    FINDALL("ls-a",i->{ //all list
+        try {
+            UserController.getInstance().findAll().forEach(System.out::println);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }),
     COUNT("cnt",i->{
@@ -61,7 +69,7 @@ public enum UserRouter {
         UserController.getInstance().count();
         return true;
     }),
-    FINDUSERSBYNAME("ls-n",i->{
+    FINDUSERSBYNAME("ls-n",i->{ //find by NL name
         UserController.getInstance().findUsersByName(i).forEach(System.out::println);
         return true;
     }),
@@ -69,7 +77,7 @@ public enum UserRouter {
 //        UserController.getInstance().findUsersByNameFromMap(i).forEach(i-> i.toCharArray());
         return true;
     }),
-    FINDUSERSBYJOB("ls-job",i->{
+    FINDUSERSBYJOB("ls-job",i->{ // find by job
         UserController.getInstance().findUsersByJob(i).forEach(System.out::println);
         return true;
     }),

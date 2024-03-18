@@ -52,8 +52,9 @@ public class MenuRepository {
     }
 
     public Messenger menueOneRm(String rm) throws SQLException {
-        String sql = "DELETE FROM menus Where category = '"+rm+"'";
+        String sql = "DELETE FROM menus Where category = ?";
         pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,rm);
         return (pstmt.executeUpdate()>0)? Messenger.SUCCESS : Messenger.FAIL;
     }
 

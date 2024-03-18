@@ -23,12 +23,12 @@ public class UserRepository {
         }
     }
 
-    Connection connection;
-    PreparedStatement prstmt;
+    Connection conn;
+    PreparedStatement pstmt;
     ResultSet rs;
 
     private UserRepository() throws SQLException {
-        connection = DriverManager.getConnection(
+        conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/turingdb",
                 "turing",
                 "password");
@@ -44,8 +44,8 @@ public class UserRepository {
 
     public List<?> findUsers() throws SQLException {
         String sql = "select * from board";
-        prstmt = connection.prepareStatement(sql);
-        rs = prstmt.executeQuery();
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
 
         String msg = "";
         if (rs.next()) {
@@ -69,8 +69,8 @@ public class UserRepository {
                 "name VARCHAR(20) NOT NULL, phone VARCHAR(20), job VARCHAR(20)," +
                 "height VARCHAR(20), weight VARCHAR(20))";
         try {
-            prstmt = connection.prepareStatement(cresql);
-            prstmt.execute(cresql);
+            pstmt = conn.prepareStatement(cresql);
+            pstmt.execute(cresql);
             System.out.println("생성완");
         } catch (Exception e) {
             System.out.println("문제 발생");
@@ -82,8 +82,8 @@ public class UserRepository {
     public Messenger rm() {
         String dpsql = "DROP TABLE users";
         try {
-            prstmt = connection.prepareStatement(dpsql);
-            prstmt.executeUpdate(dpsql);
+            pstmt = conn.prepareStatement(dpsql);
+            pstmt.executeUpdate(dpsql);
         } catch (Exception e) {
             dpsql = "";
         }
@@ -99,8 +99,8 @@ public class UserRepository {
         Messenger msg = Messenger.SUCCESS;
 
         try {
-            prstmt = connection.prepareStatement(sql);
-            rs = prstmt.executeQuery();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
             list.add(Member.builder()
                     .id(rs.getLong(1))
                     .memId(rs.getString(2))
@@ -127,72 +127,94 @@ public class UserRepository {
         String msg = "";
         String input = "INSERT INTO users (mem_id, mem_pw, name, phone, job, height, weight) " +
                 "VALUES (?,?,?,?,?,?,?)";
-        prstmt = connection.prepareStatement(input);
+        pstmt = conn.prepareStatement(input);
 
-        prstmt.setString(1, mems.getMemId());
-        prstmt.setString(2, mems.getMemPw());
-        prstmt.setString(3, mems.getName());
-        prstmt.setString(4, mems.getPhone());
-        prstmt.setString(5, mems.getJob());
-        prstmt.setString(6, String.valueOf(mems.getHeight()));
-        prstmt.setString(7, String.valueOf(mems.getWeight()));
+        pstmt.setString(1, mems.getMemId());
+        pstmt.setString(2, mems.getMemPw());
+        pstmt.setString(3, mems.getName());
+        pstmt.setString(4, mems.getPhone());
+        pstmt.setString(5, mems.getJob());
+        pstmt.setString(6, String.valueOf(mems.getHeight()));
+        pstmt.setString(7, String.valueOf(mems.getWeight()));
         System.out.println(mems.toString());
-        return (prstmt.executeUpdate() > 0) ? Messenger.SUCCESS : Messenger.FAIL;
+        return (pstmt.executeUpdate() > 0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
     public List<String> login(Member member) throws SQLException {
         String sql = "select mem_id, mem_pw users from users " +
                 "where mem_id=? OR mem_pw=?";
-        prstmt = connection.prepareStatement(sql);
-        prstmt.setString(1, member.getMemId());
-        prstmt.setString(2, member.getMemPw());
-        rs = prstmt.executeQuery();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, member.getMemId());
+        pstmt.setString(2, member.getMemPw());
+        rs = pstmt.executeQuery();
         List<String> list = new ArrayList<>();
 
-            if (!rs.next()) {
-                list.add(0,"wrong ID");
-                list.add(1,"wrong PW");
-                return list;
-            }
+        if (!rs.next()) {
+            list.add(0, "wrong ID");
+            list.add(1, "wrong PW");
+            return list;
+        }
         list.add(0, rs.getString("mem_id"));
         list.add(1, rs.getString(2));
 
         return list;
     }
 
-    public Optional<Member> findById(Long id) throws SQLException {
-        String sql = "select id from users where id=?";
-        prstmt = connection.prepareStatement(sql);
-        System.out.println("11anjdl");
-
-        prstmt.setLong(1, id);
-        rs = prstmt.executeQuery();
-
-        Optional<Member> oprional = null;
-        System.out.println("11anjdl");
-        Long rsid = 0L;
+    public Messenger findById(Long id) throws SQLException {
+        String sql = "select id, mem_id from users where id=?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setLong(1, id);
+        rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            rsid = rs.getLong("id");
-            if (rsid.equals(id)) {
-                oprional = Optional.ofNullable(Member.builder().id(id).build());
-            }
+            Member memids = Member.builder()
+                    .id(rs.getLong("id"))
+                    .memId(rs.getString("mem_id"))
+                    .build();
+
+            System.out.println("Long Id : " + rs.getString("id"));
+            System.out.println("member id : " + rs.getString("mem_id"));
+        } else {
+            System.out.println("Long id " + id + " is nothing.");
+            return Messenger.FAIL;
         }
-
-
-        return oprional;
+        return Messenger.SUCCESS;
     }
 
     public Messenger updatePassword(Member member) throws SQLException {
-        String sql = "select mem_pw from user where mem_id = ? or mem_pw=?";
-        prstmt = connection.prepareStatement(sql);
-        prstmt.setString(1, member.getMemPw());
-        prstmt.setString(2, member.getMemPw());
-        System.out.println("dkjf");
-        prstmt.executeUpdate();
-        System.out.println("dkjf");
+        String sql = "update users set mem_pw = ? where mem_id = ?";
+        System.out.println(member.getMemId() + " " + member.getMemPw());
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, member.getMemPw());
+        pstmt.setString(2, member.getMemId());
+        pstmt.executeUpdate();
         return Messenger.SUCCESS;
     }
 
 
+    public String delete(Member member) throws SQLException {
+        String sql = "DELETE FROM users Where mem_id = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, member.getMemId());
+        pstmt.executeUpdate();
+        return "deledele";
+    }
+
+    public List<Member> findAll() throws SQLException {
+        String sql = "select mem_id, name, phone, job, height, weight from users";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+        List<Member> list = new ArrayList<>();
+        if(rs.next()) {
+            list.add(Member.builder()
+                    .memId(rs.getString(1))
+                    .name(rs.getString(2))
+                    .phone(rs.getString(3))
+                    .job(rs.getString(4))
+                    .height(rs.getDouble(5))
+                    .weight(rs.getDouble(6))
+                    .build());
+        }
+        return list;
+    }
 }

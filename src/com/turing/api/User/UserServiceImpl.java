@@ -46,14 +46,17 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public List<Member> findAll() {
-        return new ArrayList<>(users.values());
+    public List<Member> findAll() throws SQLException {
+//        return new ArrayList<>(users.values());
+        List<Member> list = repo.findAll();
+        System.out.println("Ok!");
+        list.forEach(System.out::println);
+        return list;
     }
 
     @Override
     public String login(Member member) throws SQLException {
         List<String> list = repo.login(member);
-        list.forEach(System.out::println);
 
         if (!member.getMemId().equals(list.get(0))) {
             return "ID ["+member.getMemId()+"] is wrong ID";
@@ -70,7 +73,8 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
 //                .values().stream()
 //                .filter(i->i.getId().equals(id))
 //                .toList().get(0));
-        return repo.findById(id);
+        repo.findById(id);
+        return null;
     }
 
     @Override
@@ -87,8 +91,21 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     }
 
     @Override
-    public Messenger delete(Member member) {
-        users.remove(member.getMemId());
+    public Messenger delete(Member member) throws SQLException {
+//        users.remove(member.getMemId());
+        List<String> list = repo.login(member);
+        if (!member.getMemId().equals(list.get(0))) {
+            System.out.println("ID ["+member.getMemId()+"] is wrong ID");
+            return Messenger.FAIL;
+        }
+        if (!member.getMemPw().equals(list.get(1))) {
+            System.out.println( "Wrong password input.");
+            return Messenger.FAIL;
+        }
+        System.out.println("ID n PW is oK");
+        repo.delete(member);
+        System.out.println("successful delete.");
+
         return Messenger.SUCCESS;
     }
 
