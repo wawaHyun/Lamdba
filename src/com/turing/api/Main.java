@@ -20,7 +20,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while (true){
-        UserRouter.getUserRouter(sc);}
+            UserRouter.getUserRouter(sc);}
 //        MenuRouter.getMenuRouter(sc);
 
 //        Messenger msg = MenuController.getInsteance().returnMessenger();

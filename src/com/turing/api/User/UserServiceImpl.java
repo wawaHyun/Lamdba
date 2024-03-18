@@ -49,8 +49,8 @@ public class UserServiceImpl extends AbstractService<Member> implements UserServ
     public List<Member> findAll() throws SQLException {
 //        return new ArrayList<>(users.values());
         List<Member> list = repo.findAll();
-        System.out.println("Ok!");
         list.forEach(System.out::println);
+        System.out.println("Ok!");
         return list;
     }
 

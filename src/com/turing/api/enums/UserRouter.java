@@ -150,7 +150,6 @@ public enum UserRouter {
 //                "job search(findUsersByJob), job search(findUsersByJobFromMap), getOne(String id)," +
 //                "getUserMap, Check membership registration('existsById'), test, Repository, " +
 //                "touch-table create, rm-table delete, ls-table list check, in-table value insert");
-
         System.out.println("[MENU]");
         MenuController.getInsteance().getMenusByCategory("user").forEach(i -> System.out.print(((Menu)i).getMenuItem() + ", "));
         System.out.println();

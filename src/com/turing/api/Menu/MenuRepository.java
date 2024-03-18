@@ -102,7 +102,7 @@ public class MenuRepository {
                     .menuItem(rs.getString(1))
                     .build());
         } catch (SQLException e){
-            System.err.println("SQL Exception Occurred");
+            System.err.println("SQL Exception Occurred by getMenusByCategory");
             return menus;
         }
         return menus;
@@ -115,9 +115,8 @@ public class MenuRepository {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.execute(sql);
-            System.out.println("생성완");
         } catch (Exception e) {
-            System.out.println("문제 발생");
+            System.out.println("error by menuTouch");
             sql = "";
         }
         return (sql.isEmpty()) ? Messenger.FAIL : Messenger.SUCCESS;
